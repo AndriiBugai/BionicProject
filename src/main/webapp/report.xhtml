@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<h:head>
+	
+	<title>Create a user</title>
+</h:head>
+
+
+<h:body>
+	<h:outputStylesheet library="css" name="style.css" />
+
+	
+	<ui:composition template="WEB-INF/templatesReport/BasicTemplateReport.xhtml">
+	<ui:define name="content">
+	
+	
+	<f:metadata>
+  <!--			<f:viewAction phase="PROCESS_VALIDATIONS" action="#{report1.checkRole}"/>   -->
+	</f:metadata>
+
+
+
+	<h:form id="form">
+   	
+   	<h3 style="font-size: 14pt; text-align: center; padding-top: 20px;"> Report </h3>
+   	
+   		<h:panelGrid style="margin: 0 auto" columns="3"> 
+   						<p:outputLabel  value="*First Date:" />
+						<p:inputText id="firstdate"  value="#{report1.date1}" required="true" requiredMessage="#{report1.dateRequired}" size="28">
+							<f:convertDateTime pattern="dd.MM.yyyy" />
+						</p:inputText>
+						<p:message for="firstdate" errorStyle="color:red; display:block"/>
+   						
+   						<p:outputLabel  value="*Last Date:" />
+						<p:inputText id="lastdate"  value="#{report1.date2}" required="true" requiredMessage="#{report1.dateRequired}" size="28">
+							<f:convertDateTime pattern="dd.MM.yyyy" />
+						</p:inputText>
+						<p:message for="lastdate" errorStyle="color:red; display:block"/>
+						
+						<p:commandButton  value="Generate report" actionListener="#{report1.getReport}" ajax="false" />	
+   		</h:panelGrid>
+   		
+   			<h:panelGrid columns="1" style="margin: 0 auto;">	
+					<p:dataTable var="item" value="#{report1.list}">
+					 	<p:column headerText="Airport"> 		
+							<h:outputText value="#{item.name} " />					 
+						</p:column>
+						<p:column headerText="Tickes sold"> 		
+								<h:outputText value="#{item.number} " />			 
+						</p:column>
+						<p:column headerText="Total price"> 		
+								<h:outputText value="#{item.sum} " />			 
+						</p:column>
+					</p:dataTable>		
+					
+					
+							
+		</h:panelGrid>			
+		
+		<h:panelGrid style="margin: 0 auto">
+			<p:outputLabel  value="Total number of tickets: #{report1.number}" />
+			<p:outputLabel  value="Total price of tickets: #{report1.sum}" />
+			<p:chart type="pie" model="#{report1.pieModel1}" style="width:700px ;height:450px" />
+		</h:panelGrid>
+
+
+
+	</h:form>
+
+	</ui:define>
+	</ui:composition>
+
+
+</h:body>
+</html>
+
+
+
+

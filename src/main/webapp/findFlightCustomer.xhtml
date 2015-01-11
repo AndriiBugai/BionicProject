@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<h:head>
+
+	<title>Find flights</title>
+</h:head>
+
+
+<h:body>
+	<h:outputStylesheet library="css" name="style.css" />
+	<ui:composition template="WEB-INF/templatesCustomer/BasicTemplateCustomer.xhtml">
+		<ui:define name="content">
+
+			<div>
+			
+			
+			
+			<h3 style="font-size: 14pt; text-align: center; padding-top: 20px;"> Adding ticket to cart </h3>
+
+				<h:form id="form1" >
+					<h:panelGrid columns="4" style="	margin: 0 auto;
+														padding-top: 20px;
+														padding-bottom: 10px;
+														font-size: 12pt;
+														text-align: right;"	 >
+
+						<p:outputLabel  value="*Departure City:" /> 
+						<p:inputText id="dcity" value="#{flightC.depatureCity}"  required="true" requiredMessage="#{flightC.depatureCityRequired}" size="28">
+						</p:inputText>
+						
+					
+						
+						<p:outputLabel  value="*Arrival City  :" /> 
+						<p:inputText id="acity" value="#{flightC.arrivalCity}" required="true" requiredMessage="#{flightC.arrivalCityRequired}" size="28">
+						
+						</p:inputText>
+						<h:message />
+						<p:message for="dcity" errorStyle="color:red; display:block"/>
+						<h:message />
+						<p:message for="acity" errorStyle="color:red; display:block"/>
+						
+
+
+						<p:outputLabel  value="*Departure date From:" />
+						<p:inputText id="ddate"  value="#{flightC.depatureDate}" required="true" requiredMessage="#{flightC.departureDateRequired}" size="28">
+							<f:convertDateTime pattern="dd.MM.yyyy" />
+						</p:inputText>
+					
+							
+						<p:outputLabel  value="To:"/>
+						<p:inputText id="adate"  value="#{flightC.departureDate2}"  size="28">
+							<f:convertDateTime pattern="dd.MM.yyyy" />
+							
+						</p:inputText>
+						<h:message />
+						<p:message for="ddate" errorStyle="color:red; display:block"/>
+						<h:message /> 
+						<p:message for="adate" errorStyle="color:red; display:block"/>	
+						
+					</h:panelGrid>				
+						
+						
+				 <h:panelGrid style="margin: 0 auto" >
+				 	<p:commandButton  value="Find Flights" action="#{flightC.findFlightList}" ajax="false" />			
+				 </h:panelGrid>
+				    	
+			
+		<h:panelGrid columns="1" style="margin: 0 auto;">	
+					<p:dataTable rowIndexVar="row" var="flightItem" value="#{flightC.list}" rendered="#{flightC.list != null }">
+					 	<p:column headerText="Departure time"> 		
+								<h:outputText value="#{flightItem.departureTime}" >
+									<f:convertDateTime pattern="dd.MM.yyyy HH:mm" />
+								</h:outputText>					 
+						</p:column>
+						<p:column headerText=" Arrival time"> 		
+								<h:outputText value="#{flightItem.arrivalTime}">
+									<f:convertDateTime pattern="dd.MM.yyyy HH:mm" />
+								</h:outputText>				 
+						</p:column>
+						
+						<p:column headerText="Available First Class Tickets"> 		
+								<h:outputText value="#{flightItem.availableFirst}  / #{flightItem.firstClass} " />		 
+						</p:column>
+						
+						
+						<p:column headerText="Availble Ecomomy Class Tickets"> 		
+								<h:outputText value="#{flightItem.availableEconomy}  /  #{flightItem.economyClass}  " />		 
+						</p:column>
+						
+						
+
+						<p:column headerText="First price"> 		
+								<h:outputText value="#{flightItem.firstPrice} "/>		 
+						</p:column>
+						<p:column headerText="Ecomomy price"> 		
+								<h:outputText value="#{flightItem.economyPrice} "/>		 
+						</p:column>
+						<p:column headerText="" > 		
+								<p:commandButton  value="Add to Cart"  action="#{flightC.addTicketToCart(flightItem.id)}" ajax="false"  />	 
+						</p:column>					
+					</p:dataTable>				
+		</h:panelGrid>					
+					
+				</h:form>
+			</div>
+
+		</ui:define>
+	</ui:composition>
+
+
+</h:body>
+</html>

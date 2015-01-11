@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<h:head>
+	
+	<title>Create a user</title>
+</h:head>
+
+
+<h:body>
+	<h:outputStylesheet library="css" name="style.css" />
+	
+	<ui:composition template="WEB-INF/templatesSuper/BasicTemplateSuper.xhtml">
+		<ui:define name="content">
+<!--		
+	<f:metadata>
+  		<f:viewAction phase="PROCESS_VALIDATIONS" action="#{staff1.checkRole}"/>
+	</f:metadata>
+-->
+
+<h:form id="form">
+   
+   	<h:panelGrid columns="1" style="margin: 0 auto">
+   		<p:commandButton value="Download users" actionListener="#{staff1.findStaff}" ajax="false" />
+  	</h:panelGrid>
+   
+    <p:dataGrid var="staff" value="#{staff1.list}" columns="3" layout="grid"
+        rows="12" paginator="true" id="cars"
+        paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+        rowsPerPageTemplate="6,12,16">
+ 
+        <f:facet name="header">
+            Cars for Sale
+        </f:facet>
+ 
+        <p:panel header="Login: #{staff.login}" style="text-align:center">
+            <h:panelGrid columns="2" style="width:100% ; text-align:left" cellpadding="5">
+                
+                <p:outputLabel value="First name:" > </p:outputLabel>
+ 				<p:outputLabel value="#{staff.name}" > </p:outputLabel>
+ 				
+ 				<p:outputLabel value="Last name:" > </p:outputLabel>
+ 				<p:outputLabel value="#{staff.surname}" > </p:outputLabel>
+ 				
+ 				<p:outputLabel value="Login:" > </p:outputLabel>
+ 				<p:outputLabel value="#{staff.login}" > </p:outputLabel>   
+ 				
+ 				<p:outputLabel value="State:" > </p:outputLabel>
+ 				<p:outputLabel value="#{staff.enabled}" > </p:outputLabel> 
+ 
+  				<p:outputLabel value="Position:" > </p:outputLabel>
+ 				<p:outputLabel value="#{staff.position}" > </p:outputLabel>              
+  
+  				<p:outputLabel value="Passport:" > </p:outputLabel>
+ 				<p:outputLabel value="#{staff.passport}" > </p:outputLabel>
+
+ 				<p:outputLabel value="e-mail:" > </p:outputLabel>
+ 				<p:outputLabel value="#{staff.email}" > </p:outputLabel>         
+ 				
+ 				<p:outputLabel value="phone:" > </p:outputLabel>
+ 				<p:outputLabel value="#{staff.phone}" > </p:outputLabel>
+ 				
+
+ 				
+            </h:panelGrid>
+            
+              <h:panelGrid columns="2" style="margin: 0 auto" cellpadding="5">
+              		 <p:commandButton value="Edit" action="#{staff1.edit(staff.id)}" ajax="false" />
+              		 <p:commandButton value="Change Password" action="#{staff1.changePassword(staff.id)}" ajax="false" />
+              </h:panelGrid>
+            
+            
+        </p:panel>
+ 
+    </p:dataGrid>
+ 
+
+</h:form>
+
+
+
+
+		</ui:define>
+	</ui:composition>
+
+
+</h:body>
+</html>
+
+
+
+

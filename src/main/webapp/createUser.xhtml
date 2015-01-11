@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<h:head>
+	<title>Create a user</title>
+</h:head>
+
+
+<h:body>
+	<h:outputStylesheet library="css" name="style.css" />
+	
+	<ui:composition template="WEB-INF/templatesSuper/BasicTemplateSuper.xhtml">
+		<ui:define name="content">
+
+		
+	<f:metadata>
+<!--  		<f:viewAction phase="PROCESS_VALIDATIONS" action="#{createStaff.checkRole}"/>   -->	
+	</f:metadata>
+
+			<div>
+				<h5 style="font-size: 12pt; text-align: center;" > New account registration. All fields are mandatory. </h5>
+				<h:form id="form1" >
+						
+				
+					<h:panelGrid style="margin-left:20%; padding-top: 20px; padding-bottom: 10px;" columns="3" cellpadding="5"  >
+
+						<p:outputLabel value="First name:" > </p:outputLabel>
+						<p:inputText id="name" value="#{createStaff.user.name}"  required="true" requiredMessage="#{createStaff.nameRequired}" size="28">
+						</p:inputText>
+						<p:message  for="name" errorStyle="color:red; display:block"/>
+						
+						<p:outputLabel value="Last name:" > </p:outputLabel>
+						<p:inputText id="surname" value="#{createStaff.user.surname}" required="true" requiredMessage="#{createStaff.surnameRequired}" size="28">
+						</p:inputText>
+						<p:message for="surname" errorStyle="color:red; display:block"   />
+						
+						
+						<p:outputLabel value="Passport number:"></p:outputLabel>
+						<p:inputText id="pnumber"  value="#{createStaff.user.passport}" required="true" requiredMessage="#{createStaff.passportRequired}" size="28">
+						</p:inputText>
+						<p:message for="pnumber" errorStyle="color:red; display:block"/>
+						
+						
+						<p:outputLabel value="E-mail:"></p:outputLabel>
+						<p:inputText id="email" value="#{createStaff.user.email}"  required="true" requiredMessage="#{createStaff.emailRequired}" size="28">
+						</p:inputText>
+						<p:message for="email" errorStyle="color:red; display:block"/>
+						
+						<p:outputLabel value="Phone:"></p:outputLabel>
+						<p:inputText id="phone" value="#{createStaff.user.phone}" required="true" requiredMessage="#{createStaff.phoneRequired}" size="28">
+						</p:inputText>
+						<p:message for="phone" errorStyle="color:red; display:block"/>
+						
+						
+						<p:outputLabel value="Login:"></p:outputLabel>
+						<p:inputText id="login" value="#{createStaff.user.login}" required="true" requiredMessage="#{createStaff.loginRequired}" size="28">
+						</p:inputText>
+						<p:message for="login" errorStyle="color:red; display:block"/>
+						
+						<p:outputLabel value="Password:"></p:outputLabel>
+						<p:password id="pas1" value="#{createStaff.user.password}" match="pas2" feedback="true" label="This password"  required="true" 
+						requiredMessage="#{createStaff.passwordRequired}" size="28" />
+						<p:message for="pas1" errorStyle="color:red; display:block"/>
+						
+						<p:outputLabel value="Password:"></p:outputLabel>
+						<p:password id="pas2" value="#{createStaff.user.password}" feedback="true" label="the password below"  required="true" 
+						requiredMessage="#{createStaff.passwordRequired2}" validatorMessage="#{createStaff.passwordRequired2}" size="28" />
+						<p:message for="pas2" errorStyle="color:red; display:block"/>
+
+						<p:outputLabel  value="State:" />
+					    <p:selectOneRadio  value="#{createStaff.user.enabled}" layout="grid" columns="1">
+					            <f:selectItem itemLabel="Enabled" itemValue="Enabled" />
+					            <f:selectItem itemLabel="Diasbled" itemValue="Disabled" />
+					            
+					    </p:selectOneRadio>
+					    
+					    <h:message />
+			
+						<p:outputLabel for="console" value="Position:" />
+					    <p:selectOneRadio id="console" value="#{createStaff.user.position}" layout="grid" columns="1">
+					            <f:selectItem itemLabel="Booking office administrator" itemValue="Booking office administrator" />
+					            <f:selectItem itemLabel="Booking office accountant" itemValue="Booking office accountant" />
+					            <f:selectItem itemLabel="Business analyst" itemValue="Business analyst" />
+					    </p:selectOneRadio>
+						
+					</h:panelGrid>
+					
+					<h:panelGrid columns="1"
+						style=" margin-left:40%;  padding-top: 10px; padding-bottom: 10px;  font-size: 12pt;  ">
+
+							<p:commandButton value="Submit" action="#{createStaff.submition}" ajax="false" />
+						</h:panelGrid>
+						
+
+					
+				</h:form>
+			</div>
+
+		</ui:define>
+	</ui:composition>
+
+
+</h:body>
+</html>

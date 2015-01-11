@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	
+<body> 
+	<ui:composition> 
+	
+
+
+	
+	<h:panelGrid columns="3" cellpadding="5" style = "width: 100%;"  >
+		<h:graphicImage library="images" name="logo2.png" width="250" height="151" />
+	
+		
+		<h:panelGrid columns="1" cellpadding="5"   >
+			<p:outputLabel style = "margin: 0 auto; font-size: 20pt; " value="Airline Booking Office" />
+
+		</h:panelGrid>
+		
+		<h:panelGrid columns="2" cellpadding="2" style = "margin-left:auto; margin-right:0; margin-top:auto; margin-bottom:0;  color: grey;"  >
+			<p:outputLabel style = " vertical-align: top;" value="Tickets in cart:" />
+	    	<p:outputLabel style = " vertical-align: top;" value="#{flightC.cart.size()}" />
+	    	<p:outputLabel style = " vertical-align: top;" value="Total price:" />
+	    	<p:outputLabel style = " vertical-align: top;" value="#{flightC.totalSum}" />
+		</h:panelGrid>
+	</h:panelGrid>	
+	
+	
+
+		
+		<h:form>	
+		
+		
+		
+			<p:tabMenu activeIndex="#{param.i}">
+			    <p:menuitem value="Find a ticket" outcome="findFlightCustomer" icon="ui-icon-star">
+			        <f:param name="i" value="0" />
+			    </p:menuitem>
+			    <p:menuitem value="Cart" outcome="ticketCart" icon="ui-icon-cart">
+			        <f:param name="i" value="1" />
+			    </p:menuitem>
+			    <p:menuitem value="Sign in" outcome="signIn" icon="ui-icon-key">
+			        <f:param name="i" value="2" />
+			    </p:menuitem>
+			</p:tabMenu>
+				
+		</h:form>	
+	</ui:composition> 
+	
+
+	
+</body> 
+</html>

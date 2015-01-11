@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+
+<h:head>
+
+	<title>Confirmation</title>
+</h:head>
+
+
+<h:body>
+
+	<ui:composition template="WEB-INF/templatesAdmin/BasicTemplateAdmin.xhtml">
+		<ui:define name="content">
+
+
+
+			<h:form>
+
+
+				<h:panelGrid columns="2" style="margin-left:30%;  padding-top: 10px; padding-bottom: 10px;  font-size: 12pt;  ">
+
+						<h:outputText value="First name:"></h:outputText>
+						<h:inputText value="#{staff1.name}" readonly="true" size="28">
+						</h:inputText>
+						<h:outputText value="Last name:"></h:outputText>
+						<h:inputText value="#{staff1.surname}" readonly="true" size="28">
+						</h:inputText>
+						<h:outputText value="Passport number:"></h:outputText>
+						<h:inputText value="#{staff1.passport}" readonly="true" size="28">
+						</h:inputText>
+						<h:outputText value="E-mail:"></h:outputText>
+						<h:inputText value="#{staff1.email}" readonly="true" size="28">
+						</h:inputText>
+						<h:outputText value="Phone:"></h:outputText>
+						<h:inputText value="#{staff1.phone}" readonly="true" size="28">
+						</h:inputText>
+						<h:outputText value="Login:"></h:outputText>
+						<h:inputText value="#{staff1.login}" readonly="true" size="28">
+						</h:inputText>
+						<h:outputText value="Position:"></h:outputText>
+							<h:inputText value="Booking office administrator" rendered="#{staff1.position == '1' }" readonly="true"  size="28">  </h:inputText>
+							<h:inputText value="Booking office accountant" rendered="#{staff1.position == '2'}"  readonly="true" size="28">  </h:inputText>
+							<h:inputText value="Business analyst" rendered="#{staff1.position == '3'}" readonly="true" size="28">   </h:inputText>
+										
+				</h:panelGrid>
+				
+				<h:panelGrid columns="1" style=" margin-left:30%;  padding-top: 10px; padding-bottom: 10px;  font-size: 12pt;  ">
+					<h:outputText value="The new account has been created successfully."></h:outputText>
+				</h:panelGrid>
+						
+			</h:form>
+
+		</ui:define>
+	</ui:composition>
+
+
+</h:body>
+</html>

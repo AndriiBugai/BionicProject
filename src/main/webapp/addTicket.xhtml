@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<h:head>
+	
+	<title>Create a user</title>
+</h:head>
+
+
+<h:body>
+	<h:outputStylesheet library="css" name="style.css" />
+	
+	<ui:composition template="WEB-INF/templatesCustomer/BasicTemplateCustomer.xhtml">
+		<ui:define name="content">
+
+			<div>
+				<h5 class="title" > Information about a passenger </h5>
+				<h:form id="form1" >
+						
+				
+					<h:panelGrid class="grid" columns="3"  >
+
+						<p:outputLabel value="First name:" > </p:outputLabel>
+						<p:inputText id="name" value="#{flightC.ticket.name}"  required="true" requiredMessage="#{flightC.nameRequired}" size="24" >
+						</p:inputText>
+						<p:message  for="name" errorStyle="color:red; display:block"/>
+						
+						<p:outputLabel value="Last name:" > </p:outputLabel>
+						<p:inputText id="surname" value="#{flightC.ticket.surname}"  required="true" requiredMessage="#{flightC.surnameRequired}" size="24" >
+						</p:inputText>
+						<p:message  for="surname" errorStyle="color:red; display:block"/>
+						
+						<p:outputLabel value="Passport number:" > </p:outputLabel>
+						<p:inputText id="pass" value="#{flightC.ticket.passport}"  required="true" requiredMessage="#{flightC.passportRequired}" size="24" >
+						</p:inputText>
+						<p:message  for="pass" errorStyle="color:red; display:block"/>							
+									
+						<p:outputLabel for="gender" value="Gender" />
+				        <p:selectOneMenu id="gender" value="#{flightC.ticket.gender}"  >
+				            <f:selectItem itemLabel="Male" itemValue="male"  />
+				            <f:selectItem itemLabel="Female" itemValue="female"  />
+				        </p:selectOneMenu>
+				        <h:message />		
+				        
+				        <p:outputLabel for="seat" value="Seat Class" />
+				        <p:selectOneMenu id="seat" value="#{flightC.ticket.seatClass}"  >
+				            <f:selectItem itemLabel="First class" itemValue="first class"  />
+				            <f:selectItem itemLabel="Economy class" itemValue="economy class"  />
+				        </p:selectOneMenu>
+				        <h:message />	
+						
+						<p:outputLabel value="Birthdate:" > </p:outputLabel>
+						<p:inputText id="bdate" value="#{flightC.birthdate}"  required="true" requiredMessage="#{flightC.birthdateRequired}" size="24" >
+							<f:convertDateTime pattern="dd.MM.yyyy" />
+						</p:inputText>
+						<p:message  for="bdate" errorStyle="color:red; display:block"/>	
+        
+				 </h:panelGrid> 
+				 
+				 <h:panelGrid class="grid" columns="1"  >
+				        <p:outputLabel value="#{flightC.error}"  />
+				        <p:commandButton  value="Submit"  action="#{flightC.confirmTicket}" ajax="false"  />	 
+				</h:panelGrid> 	
+						
+					
+					
+					
+					
+				</h:form>
+			</div>
+
+		</ui:define>
+	</ui:composition>
+
+
+</h:body>
+</html>

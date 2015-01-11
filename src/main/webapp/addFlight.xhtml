@@ -1,0 +1,156 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+<h:head>
+	<title>Sign in</title>
+</h:head>
+
+<h:body>
+
+	<h:outputStylesheet library="css" name="styleTable.css"  />
+
+	<ui:composition template="WEB-INF/templatesAdmin/BasicTemplateAdmin.xhtml">
+	<ui:define name="content">
+	
+
+	<h3 style="font-size: 14pt; text-align: center; padding-top: 20px;"> Adding new Flight </h3>
+	
+	
+		
+		<h:form style="margin: 0 auto">
+		<p:growl id="growl" showDetail="true" sticky="true" />  
+			<h:panelGrid columns="4" style="margin: 0 auto; padding-top: 20px; padding-bottom: 10px; width=100%  ">	
+						
+		
+				
+					<p:outputLabel value="Departure Airport City:"  />
+					<p:inputText id="dcity" value="#{addflight1.dcity}"  required="true" requiredMessage="#{addflight1.dcityRequired}" size="28"/>		
+					<p:outputLabel value="Arrival Airport City:" />
+					<p:inputText id="acity" value="#{addflight1.acity}"  required="true" requiredMessage="#{addflight1.acityRequired}" size="28"/>
+					
+					<p:commandButton  value="Find Airports" id="fd" actionListener="#{addflight1.findAirports}" ajax="false" />
+					<p:message for="dcity" />
+					<h:message />
+					<p:message for="acity" />
+				
+									
+	</h:panelGrid>
+	
+
+		
+		
+		<h:panelGrid styleClass="foo" columns="2" style="margin: 0 auto; ">	
+				<p:dataTable var="depAirport" value="#{addflight1.dlist}" rendered="#{addflight1.dList != null}">
+				    <p:column headerText="Country">
+				        <h:outputText value="#{depAirport.country}" />
+				    </p:column>
+				 
+				    <p:column headerText="City">
+				        <h:outputText value="#{depAirport.city}" />
+				    </p:column>
+				    
+				  	<p:column headerText="Name">
+				        <h:outputText value="#{depAirport.name}" />
+				    </p:column>
+				    
+				    <p:column style="width: 25%" headerText="" >
+					    <p:commandButton  value="Choose"  actionListener="#{addflight1.chooseDeparture(depAirport.id)}" ajax="false"  />
+					</p:column>
+				    				    
+				</p:dataTable>
+				
+				
+				<p:dataTable style="margin-top: 0" var="arrAirport" value="#{addflight1.alist}" rendered="#{addflight1.aList != null}">
+				    <p:column headerText="Country">
+				        <h:outputText value="#{arrAirport.country}" />
+				    </p:column>
+				 
+				    <p:column headerText="City">
+				        <h:outputText value="#{arrAirport.city}" />
+				    </p:column>
+				    
+				    <p:column headerText="Name">
+				        <h:outputText value="#{arrAirport.name}" />
+				    </p:column>
+				    <p:column style="width: 25%" headerText="" >
+					    <p:commandButton    value="Choose"  actionListener="#{addflight1.chooseArrival(arrAirport.id)}"  ajax="false" />
+					</p:column>
+				</p:dataTable>
+				
+
+				
+						       
+	        </h:panelGrid>
+	        
+	        
+	        <h:panelGrid columns="2" style="margin-left: 300px;">
+					<p:outputLabel value="Departure Airport:"  />
+					<p:outputLabel id="depName" value="#{addflight1.flight.depAirport.name}"  />
+					<p:outputLabel value="Arrival Airport:"  />
+					<p:outputLabel id="arrName" value="#{addflight1.flight.destAirport.name}"  />
+
+				</h:panelGrid>	
+	       </h:form> 
+	        
+	        
+	        
+	        
+	        <h:form style="margin: 0 auto">
+	        <h:panelGrid columns="3" style="margin-left: 300px;">
+				       			<p:outputLabel value="Departure Time" />
+				<p:inputText id="depDate" value="#{addflight1.depDate}" required="true" requiredMessage="#{addflight1.departureTimeRequired}" >
+					<f:convertDateTime pattern="dd.MM.yyyy HH:mm" />
+				</p:inputText>
+				<p:message for="depDate" />
+				
+				<p:outputLabel value="Arrival Time:" />
+				<p:inputText id="arrDate" value="#{addflight1.arrDate }" required="true" requiredMessage="#{addflight1.arrivalTimeRequired}" >
+					<f:convertDateTime pattern="dd.MM.yyyy HH:mm" />
+				</p:inputText>
+				<p:message for="arrDate" />
+	        
+	        	<p:outputLabel value="Number of First Class seats:" />
+				<p:inputText id="firstClass" value="#{addflight1.flight.firstClass }" required="true" requiredMessage="#{addflight1.firstClassRequired}" />
+				<p:message for="firstClass" />
+				
+				<p:outputLabel value="Price of a First Class ticket:" />
+				<p:inputText id="firstPrice" value="#{addflight1.flight.firstPrice }" required="true" requiredMessage="#{addflight1.firstPriceRequired}" />
+				<p:message for="firstPrice" />
+				
+				<p:outputLabel value="Number of Economy Class seats:" />
+				<p:inputText id="economyClass" value="#{addflight1.flight.economyClass }" required="true" requiredMessage="#{addflight1.economyClassRequired}" />
+				<p:message for="economyClass" />
+				
+				<p:outputLabel value="Price of a Economy Class ticket:" />
+				<p:inputText id="economyPrice" value="#{addflight1.flight.economyPrice }" required="true" requiredMessage="#{addflight1.economyPriceRequired}" />
+				<p:message for="economyPrice" />
+				
+				<p:outputLabel value="Flight number:" />
+				<p:inputText id="flightNumber" value="#{addflight1.flight.flightNumber }" required="true" requiredMessage="#{addflight1.flightNumberRequired}" />
+				<p:message for="flightNumber" />
+				
+	        
+	         </h:panelGrid>
+	      
+	        <h:panelGrid style="margin: 0 auto; padding-bottom: 10px;" >
+	        	<p:outputLabel style="color: red" id="error22" value="#{addflight1.airportError}"  />	        	
+	     	   
+	     	   	<p:commandButton  value="Submit" id="ca" action="#{addflight1.submit}"  ajax="false" />
+	     	        
+ 
+
+
+	        </h:panelGrid>
+	        	        
+      	</h:form>
+	
+	</ui:define>
+	</ui:composition>
+</h:body>
+</html>

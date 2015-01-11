@@ -1,0 +1,95 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+<h:head>
+	<title>Sign in</title>
+</h:head>
+
+<h:body>
+	<ui:composition template="WEB-INF/templatesCustomer/BasicTemplateCustomer.xhtml">
+	<ui:define name="content">
+		
+		<h:form style="margin: 0 auto">
+		
+
+    	
+    	
+   <p:dataScroller rowIndexVar="row" value="#{flightC.cart}" var="ticket" chunkSize="10">
+        <f:facet name="header">
+            Cart
+        </f:facet>
+ 
+        <h:panelGrid columns="1" style="width:100%" columnClasses="logo,detail">
+           
+ 
+            <p:outputPanel>
+                <h:panelGrid columns="2" cellpadding="5">
+						<h:outputText value="From:" />
+			            <h:outputText value="#{ticket.flight.depAirport.city }" />
+			            
+			            <h:message />
+			            <h:outputText value="#{ticket.flight.depAirport.name }" />
+			 			
+			 			<h:outputText value="To:" />
+			            <h:outputText value="#{ticket.flight.destAirport.city }" />
+			            
+			            <h:message />
+			            <h:outputText value="#{ticket.flight.destAirport.name }" />			            
+			            
+			            <h:outputText value="Departs:" />
+			            <h:outputText value="#{ticket.flight.departureTime}" >
+			            	<f:convertDateTime pattern="dd.MM.yyyy HH:mm" />
+			            </h:outputText>
+			            
+			            <h:outputText value="Arrives:" />
+			            <h:outputText value="#{ticket.flight.arrivalTime}" >
+			            	<f:convertDateTime pattern="dd.MM.yyyy HH:mm" />
+			            </h:outputText>
+			            		            
+			            <h:outputText value="Class" />
+			            <h:outputText value="#{ticket.seatClass }" />
+			            
+			            <h:outputText value="Price" />
+			            <h:outputText value="#{ticket.price}" />
+			            		            
+			            <h:outputText value="First Name:" />
+			            <h:outputText value="#{ticket.name }" />
+			 
+			 			<h:outputText value="Last Name:" />
+			            <h:outputText value="#{ticket.surname}" />
+			          			            
+			            <p:commandButton  value="Edit" action="#{flightC.editTicket(row)}"   ajax="false"  />
+			            <p:commandButton  value="Delte from cart" actionListener="#{flightC.deleteFromCart(row)}"   ajax="false"  />
+			            
+                </h:panelGrid>
+                <p:separator />
+            </p:outputPanel>
+        </h:panelGrid>
+    </p:dataScroller>
+    	
+    		
+    		 <h:panelGrid columns="2" style="margin: 0 auto">
+    		 	<p:outputLabel value="Amount of tickets:" />
+    		 	<p:outputLabel value="#{flightC.cart.size()}" />
+    		 	
+    		 	<p:outputLabel value="Tickets total price:" />
+    		 	<p:outputLabel value="#{flightC.totalSum}" />
+    		 	
+    		 	<p:commandButton  value="Book tickets" action="bookTickets"   ajax="false" rendered="#{flightC.cart.size() > 0 }"  />
+    		 </h:panelGrid>
+			
+			
+			
+	        
+	        
+      	</h:form>
+	
+	</ui:define>
+	</ui:composition>
+</h:body>
+</html>

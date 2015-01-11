@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+<h:head>
+	<title>Sign in</title>
+</h:head>
+
+<h:body>
+	<ui:composition template="WEB-INF/templatesAdmin/BasicTemplateAdmin.xhtml">
+	<ui:define name="content">
+	
+	
+	<f:metadata>
+ <!-- 		<f:viewAction phase="PROCESS_VALIDATIONS" action="#{airport1.checkRole}"/>    -->	
+	</f:metadata>
+	
+		<h:form style="margin: 0 auto">
+		
+			<h:panelGrid columns="3" style="margin: 0 auto; padding: 20px  ">					
+				<p:outputLabel value="City:" />
+				<p:inputText id="city" value="#{airport1.city}" required="true" requiredMessage="#{airport1.cityRequired}" />
+				<p:message for="city" />
+				
+				<p:outputLabel value="Country:" />
+		        <p:inputText id="country" value="#{airport1.country}" required="true" requiredMessage="#{airport1.countryRequired}" />
+		        <p:message for="country" />
+		        
+		        <p:outputLabel value="Name:" />
+		        <p:inputText id="name" value="#{airport1.name}" required="true" requiredMessage="#{airport1.nameRequired}" />
+		        <p:message for="name" />	        
+	        </h:panelGrid>
+	      
+	        <h:panelGrid style="margin: 0 auto; padding-bottom: 10px;" >
+	     	   <p:commandButton  value="Create Airport" id="ca" actionListener="#{airport1.submit}" ajax="false" />
+	        </h:panelGrid>
+	        	        
+      	</h:form>
+	
+	</ui:define>
+	</ui:composition>
+</h:body>
+</html>

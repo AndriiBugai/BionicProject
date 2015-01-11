@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<h:head>
+	
+	<title>Create a user</title>
+</h:head>
+
+
+<h:body>
+	<h:outputStylesheet library="css" name="style.css" />
+	
+	<ui:composition template="WEB-INF/templatesCustomer/BasicTemplateCustomer.xhtml">
+		<ui:define name="content">
+
+			<h3 style="font-size: 14pt; text-align: center; padding-top: 20px;"> Input your personal data </h3>	
+			
+			<h:form>
+			<h:panelGrid columns="3" style="margin: 0 auto; padding-top: 20px; padding-bottom: 10px; width=100% ">
+			
+					<p:outputLabel value="First Name:"  />
+					<p:inputText id="name" value="#{flightC.name}"  required="true" requiredMessage="#{flightC.nameRequired}" size="28"/>	
+					<p:message for="name"/>	
+					
+					<p:outputLabel value="Last Name:" />
+					<p:inputText id="surname" value="#{flightC.surname}"  required="true" requiredMessage="#{flightC.surnameRequired}" size="28"/>	
+					<p:message for="surname"/>	
+					
+					<p:outputLabel value="e-mail:" />
+					<p:inputText id="email" value="#{flightC.email}"  required="true" requiredMessage="#{flightC.emailRequired}" size="28"/>	
+					<p:message for="email"/>	
+					
+			</h:panelGrid>	
+			
+			<h:panelGrid columns="1"  style="margin: 0 auto;">
+				 		 
+				  <p:commandButton value="Submit" action="#{flightC.bookTickets}" >
+        				<p:confirm header="Confirmation" message="You have succesfully booked tickets. Wait for further information on your mail" icon="ui-icon-alert" />
+    					</p:commandButton>
+ 
+					    <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
+					        <p:commandButton value="OK" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+					    </p:confirmDialog>
+				 
+				 
+			</h:panelGrid>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+
+
+</h:body>
+</html>
