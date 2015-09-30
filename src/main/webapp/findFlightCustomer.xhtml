@@ -20,16 +20,19 @@
 		<ui:define name="content">
 
 			<div>
+						
+			<h:panelGrid columns="4"  style="	font-weight: 600;
+												margin: 0 auto; 
+												text-align: center; 
+												padding-top: 20px;"	 >
 			
-			
-			
-			<h3 style="font-size: 14pt; text-align: center; padding-top: 20px;"> Adding ticket to cart </h3>
-
+			<p:outputLabel  value="Search flights" />
+			</h:panelGrid>
 				<h:form id="form1" >
 					<h:panelGrid columns="4" style="	margin: 0 auto;
 														padding-top: 20px;
 														padding-bottom: 10px;
-														font-size: 12pt;
+														font-size: 11pt;
 														text-align: right;"	 >
 
 						<p:outputLabel  value="*Departure City:" /> 
@@ -38,22 +41,29 @@
 						
 					
 						
-						<p:outputLabel  value="*Arrival City  :" /> 
+						<p:outputLabel  value=".           *Arrival City :" /> 
 						<p:inputText id="acity" value="#{flightC.arrivalCity}" required="true" requiredMessage="#{flightC.arrivalCityRequired}" size="28">
 						
+						
+						
 						</p:inputText>
-						<h:message />
+
 						<p:message for="dcity" errorStyle="color:red; display:block"/>
-						<h:message />
+
 						<p:message for="acity" errorStyle="color:red; display:block"/>
 						
-
+<p:separator />
+<p:separator />
+<p:separator />
+<p:separator />
 
 						<p:outputLabel  value="*Departure date From:" />
 						<p:inputText id="ddate"  value="#{flightC.depatureDate}" required="true" requiredMessage="#{flightC.departureDateRequired}" size="28">
 							<f:convertDateTime pattern="dd.MM.yyyy" />
 						</p:inputText>
 					
+					<p:outputLabel></p:outputLabel>
+					<p:outputLabel></p:outputLabel>
 							
 						<p:outputLabel  value="To:"/>
 						<p:inputText id="adate"  value="#{flightC.departureDate2}"  size="28">
@@ -61,19 +71,26 @@
 							
 						</p:inputText>
 						<h:message />
+						<p:commandButton style=" float:left "  value="Find Flights" action="#{flightC.findFlightList}" ajax="false" size="90" />
+						
+
 						<p:message for="ddate" errorStyle="color:red; display:block"/>
-						<h:message /> 
+
 						<p:message for="adate" errorStyle="color:red; display:block"/>	
+						
+						
 						
 					</h:panelGrid>				
 						
 						
-				 <h:panelGrid style="margin: 0 auto" >
-				 	<p:commandButton  value="Find Flights" action="#{flightC.findFlightList}" ajax="false" />			
+				 <h:panelGrid style="margin: 0 auto; font-size: 11pt;  "  >
+				 		
 				 </h:panelGrid>
 				    	
 			
-		<h:panelGrid columns="1" style="margin: 0 auto;">	
+		<h:panelGrid columns="1" style="margin: 0 auto;
+											font-size: 11pt;				
+		">	
 					<p:dataTable rowIndexVar="row" var="flightItem" value="#{flightC.list}" rendered="#{flightC.list != null }">
 					 	<p:column headerText="Departure time"> 		
 								<h:outputText value="#{flightItem.departureTime}" >
@@ -104,7 +121,7 @@
 								<h:outputText value="#{flightItem.economyPrice} "/>		 
 						</p:column>
 						<p:column headerText="" > 		
-								<p:commandButton  value="Add to Cart"  action="#{flightC.addTicketToCart(flightItem.id)}" ajax="false"  />	 
+								<p:commandButton  value="Select"  action="#{flightC.addTicketToCart(flightItem.id)}" ajax="false"  />	 
 						</p:column>					
 					</p:dataTable>				
 		</h:panelGrid>					

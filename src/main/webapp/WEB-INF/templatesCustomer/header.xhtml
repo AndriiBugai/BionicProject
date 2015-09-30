@@ -18,7 +18,7 @@
 	
 		
 		<h:panelGrid columns="1" cellpadding="5"   >
-			<p:outputLabel style = "margin: 0 auto; font-size: 20pt; " value="Airline Booking Office" />
+			<p:outputLabel style = "margin: 0 auto; font-size: 20pt;  font-weight: bold;" value="Airline Booking Office" />
 
 		</h:panelGrid>
 		
@@ -37,16 +37,27 @@
 		
 		
 		
-			<p:tabMenu activeIndex="#{param.i}">
-			    <p:menuitem value="Find a ticket" outcome="findFlightCustomer" icon="ui-icon-star">
+			<p:tabMenu activeIndex="#{param.i}" >
+			    <p:menuitem value="Find a ticket" outcome="findFlightCustomer" style = "font-weight: 300;" icon="ui-icon-star">
 			        <f:param name="i" value="0" />
 			    </p:menuitem>
-			    <p:menuitem value="Cart" outcome="ticketCart" icon="ui-icon-cart">
+			    <p:menuitem value="Cart" outcome="ticketCart" style = "font-weight: 400;" icon="ui-icon-cart">
 			        <f:param name="i" value="1" />
 			    </p:menuitem>
-			    <p:menuitem value="Sign in" outcome="signIn" icon="ui-icon-key">
+			    
+			     <p:menuitem value="Airlines" outcome="airlines" style = "font-weight: 500;" icon="ui-icon-key">
 			        <f:param name="i" value="2" />
 			    </p:menuitem>
+			    
+			    <p:menuitem value="Help" outcome="help" style = "font-weight: 500;" icon="ui-icon-key">
+			        <f:param name="i" value="3" />
+			    </p:menuitem>
+			    
+<ui:remove>
+			    <p:menuitem value="Sign in" outcome="signIn" icon="ui-icon-key">
+			        <f:param name="i" value="3" />
+			    </p:menuitem>
+</ui:remove>
 			</p:tabMenu>
 				
 		</h:form>	

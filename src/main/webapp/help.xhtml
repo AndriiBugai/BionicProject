@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<h:head>
+
+	<title>Find flights</title>
+</h:head>
+
+
+<h:body>
+	<h:outputStylesheet library="css" name="style.css" />
+	<ui:composition
+		template="WEB-INF/templatesCustomer/BasicTemplateCustomer.xhtml">
+		<ui:define name="content">
+
+			<div>
+
+
+
+				<h:panelGrid columns="4"
+					style="	font-weight: 600;
+												margin: 0 auto; 
+												text-align: center; 
+												padding-top: 20px;">
+
+					<p:outputLabel value="Help" />
+				</h:panelGrid>
+
+				<h:form id="form1"  style="font-size: 11pt;">
+					<h:panelGrid columns="1"
+						style="	margin: 0 auto;
+														padding: 10px;
+														
+														width: 100%
+														
+														text-align: justify;">
+
+
+
+						<p:outputLabel value="This is a web application that helps you buy airline tickets online. 
+									In order to buy a ticket choose appropriate cities of arrival and departure and neccessary date.
+					 				After that press the search button and select a flight that suits you most." />
+
+						<h:panelGrid style="margin: 0 auto">
+							<h:graphicImage style="margin: 0 auto" library="images" name="help1.PNG" width="700" height="470" />
+						</h:panelGrid>
+						
+						
+						<p:outputLabel value="Input personal data of a passenger that intends to travel and add a ticket to cart" />
+						<h:panelGrid style="margin: 0 auto">
+							<h:graphicImage style="margin: 0 auto" library="images" name="help2.PNG" width="700" height="430" />
+						</h:panelGrid>
+						
+						<p:outputLabel value="Now you are in cart. Press Continue buying in order to return to flight search. 
+									Choose Book tickets in order to finish you order." />
+									
+						<h:panelGrid style="margin: 0 auto">
+							<h:graphicImage style="margin: 0 auto" library="images" name="help3.PNG" width="700" height="320" />
+						</h:panelGrid>
+
+						<p:outputLabel value="When you are ready to complete your order press Book tickets button and enter your name and email. 
+						We will send you further information." />
+									
+						<h:panelGrid style="margin: 0 auto">
+							<h:graphicImage style="margin: 0 auto" library="images" name="help4.PNG" width="540" height="150" />
+						</h:panelGrid>
+				
+
+
+					</h:panelGrid>
+
+					<h:panelGrid columns="2" style="margin: 0 auto">
+
+						<p:commandButton style="margin: 0 auto; font-size: 11pt;  "
+							value="Continue buying" action="findFlightCustomer" ajax="false" />
+
+					</h:panelGrid>
+
+				</h:form>
+			</div>
+
+		</ui:define>
+	</ui:composition>
+
+
+</h:body>
+</html>

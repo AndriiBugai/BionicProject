@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<h:head>
+
+	<title>Find flights</title>
+</h:head>
+
+
+<h:body>
+	<h:outputStylesheet library="css" name="style.css" />
+	<ui:composition template="WEB-INF/templatesCustomer/BasicTemplateCustomer.xhtml">
+		<ui:define name="content">
+
+			<div>
+			
+			
+			
+			<h:panelGrid columns="4"  style="	font-weight: 600;
+												margin: 0 auto; 
+												text-align: center; 
+												padding-top: 20px;"	 >
+			
+			<p:outputLabel  value="List of airlines" /> 
+			</h:panelGrid>
+
+				<h:form id="form1" >
+					<h:panelGrid columns="2" style="	margin: 10px ;
+														padding-top: 10px;
+														padding-bottom: 10px;
+														
+														font-size: 11pt;
+														text-align: justify;"	 >
+
+					
+					<h:graphicImage style="margin: 20px ;" library="images" name="Lufthansa.png" width="250" height="90" />
+					<p:outputLabel   value="Lufthansa is a German airline and also the largest airline in Europe, both in terms of overall passengers carried and fleet size when combined with its subsidiaries. It operates services to 18 domestic destinations and 197 international destinations in 78 countries across Africa, the Americas, Asia, and Europe, using a fleet of more than 280 aircraft." /> 
+					
+					<h:graphicImage style="margin: 20px ;" library="images" name="Ukraine.png" width="250" height="100" />
+					<p:outputLabel  value="Ukraine International Airlines (UIA) is the flag carrier and the largest airline of Ukraine, with its head office in Kyiv. It operates domestic and international passenger flights and cargo services to Europe, Middle East, the United States and Asia. Its main base is Boryspil International Airport." /> 
+						
+					<h:graphicImage style="margin: 20px ;" library="images" name="Air_France.png" width="250" height="50" />
+					<p:outputLabel  value="Air France is a Franco-Dutch airline holding company incorporated under French law with its headquarters at Paris–Charles de Gaulle Airport in Tremblay-en-France, near Paris. The group has offices in Montreuil, Seine-Saint-Denis, Paris, and in Amstelveen, Netherlands." /> 
+					
+					
+					
+							
+		</h:panelGrid>					
+		
+		<h:panelGrid columns="2" style="margin: 0 auto">
+		
+			<p:commandButton  style="margin: 0 auto; font-size: 11pt;  "  value="Continue buying" action="findFlightCustomer"   ajax="false"  />
+		
+		</h:panelGrid>
+					
+				</h:form>
+			</div>
+
+		</ui:define>
+	</ui:composition>
+
+
+</h:body>
+</html>

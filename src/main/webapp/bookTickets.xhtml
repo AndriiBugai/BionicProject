@@ -39,9 +39,11 @@
 					
 			</h:panelGrid>	
 			
-			<h:panelGrid columns="1"  style="margin: 0 auto;">
+			<h:panelGrid columns="2"  style="margin: 0 auto;">
 				 		 
 				  <p:commandButton value="Submit" action="#{flightC.bookTickets}" >
+				  <p:commandButton  value="Back"  action="#{ticketCart}" ajax="false"  />	
+				  
         				<p:confirm header="Confirmation" message="You have succesfully booked tickets. Wait for further information on your mail" icon="ui-icon-alert" />
     					</p:commandButton>
  

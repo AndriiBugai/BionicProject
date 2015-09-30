@@ -21,11 +21,24 @@
 		<ui:define name="content">
 
 			<div>
-				<h5 class="title" > Information about a passenger </h5>
+			<h:panelGrid columns="4"  style="	font-weight: 600;
+												margin: 0 auto; 
+												text-align: center; 
+												padding-top: 20px;"	 >
+			
+			<p:outputLabel  value="Information about a passenger" />
+			
+			
+			</h:panelGrid>
 				<h:form id="form1" >
+
 						
 				
-					<h:panelGrid class="grid" columns="3"  >
+					<h:panelGrid class="grid" columns="3" style="	margin: 0 auto;
+														padding-top: 20px;
+														padding-bottom: 10px;
+														font-size: 11pt;
+														text-align: left;"	  >
 
 						<p:outputLabel value="First name:" > </p:outputLabel>
 						<p:inputText id="name" value="#{flightC.ticket.name}"  required="true" requiredMessage="#{flightC.nameRequired}" size="24" >
@@ -37,10 +50,7 @@
 						</p:inputText>
 						<p:message  for="surname" errorStyle="color:red; display:block"/>
 						
-						<p:outputLabel value="Passport number:" > </p:outputLabel>
-						<p:inputText id="pass" value="#{flightC.ticket.passport}"  required="true" requiredMessage="#{flightC.passportRequired}" size="24" >
-						</p:inputText>
-						<p:message  for="pass" errorStyle="color:red; display:block"/>							
+							
 									
 						<p:outputLabel for="gender" value="Gender" />
 				        <p:selectOneMenu id="gender" value="#{flightC.ticket.gender}"  >
@@ -49,32 +59,55 @@
 				        </p:selectOneMenu>
 				        <h:message />		
 				        
-				        <p:outputLabel for="seat" value="Seat Class" />
+
+						
+						<p:outputLabel value="Birthdate:" > </p:outputLabel>
+						<p:inputText id="bdate" value="#{flightC.birthdate}"  required="true" requiredMessage="#{flightC.birthdateRequired}" size="24" converterMessage="Date of birth should be in dd.MM.yyyy format" >
+							<f:convertDateTime pattern="dd.MM.yyyy" />
+						</p:inputText>
+						<p:message  for="bdate" errorStyle="color:red; display:block"/>	
+        
+        						<p:outputLabel value="Passport number:" > </p:outputLabel>
+						<p:inputText id="pass" value="#{flightC.ticket.passport}"  required="true" requiredMessage="#{flightC.passportRequired}" size="24" >
+						</p:inputText>
+						<p:message  for="pass" errorStyle="color:red; display:block"/>
+        
+        				        <p:outputLabel for="seat" value="Seat Class" />
 				        <p:selectOneMenu id="seat" value="#{flightC.ticket.seatClass}"  >
 				            <f:selectItem itemLabel="First class" itemValue="first class"  />
 				            <f:selectItem itemLabel="Economy class" itemValue="economy class"  />
 				        </p:selectOneMenu>
 				        <h:message />	
-						
-						<p:outputLabel value="Birthdate:" > </p:outputLabel>
-						<p:inputText id="bdate" value="#{flightC.birthdate}"  required="true" requiredMessage="#{flightC.birthdateRequired}" size="24" >
-							<f:convertDateTime pattern="dd.MM.yyyy" />
-						</p:inputText>
-						<p:message  for="bdate" errorStyle="color:red; display:block"/>	
+        
         
 				 </h:panelGrid> 
-				 
-				 <h:panelGrid class="grid" columns="1"  >
-				        <p:outputLabel value="#{flightC.error}"  />
-				        <p:commandButton  value="Submit"  action="#{flightC.confirmTicket}" ajax="false"  />	 
-				</h:panelGrid> 	
-						
-					
+		
+		
+			 
+
+											<h:panelGrid class="grid" columns="3"  >
+											
+					<h:form id="form2" >						
+			 			<p:commandButton  value="Back"  action="findFlightCustomer" ajax="false" immediate="true"  />	 
+			 		</h:form>
+				        <p:commandButton  value="Add to cart"  action="#{flightC.confirmTicket}" ajax="false"  />	 
+				        <p:outputLabel  value="" />
+					</h:panelGrid> 
+
 					
 					
 					
 				</h:form>
+				
+			
+				
 			</div>
+			
+			
+				
+
+				
+	
 
 		</ui:define>
 	</ui:composition>

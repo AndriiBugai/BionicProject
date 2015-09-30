@@ -16,8 +16,10 @@
     	<properties>
       	    <property name="javax.persistence.jdbc.driver" 
       	    		value="org.apache.derby.jdbc.EmbeddedDriver" />
-      	    <property name="javax.persistence.jdbc.url"
-        	        value="jdbc:derby:D://BionicProject//BookingDB;create=true" />
+    <!--  	    <property name="javax.persistence.jdbc.url"
+        	        value="jdbc:derby:D://BionicProject//BookingDB;create=true" />  -->
+			<property name="javax.persistence.jdbc.url"
+                value="jdbc:derby://media//strapper//WORK//BionicProject//BookingDB;create=true" />
       		<property name="eclipselink.ddl-generation.output-mode"
         			value="database" />
         	<property name="eclipselink.weaving" value="static" />

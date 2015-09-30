@@ -28,7 +28,7 @@
            
  
             <p:outputPanel>
-                <h:panelGrid columns="2" cellpadding="5">
+                <h:panelGrid columns="2" cellpadding="3"  style="font-size: 12pt;">
 						<h:outputText value="From:" />
 			            <h:outputText value="#{ticket.flight.depAirport.city }" />
 			            
@@ -80,6 +80,8 @@
     		 	<p:outputLabel value="Tickets total price:" />
     		 	<p:outputLabel value="#{flightC.totalSum}" />
     		 	
+    		 	
+    		 	<p:commandButton  value="Continue buying" action="findFlightCustomer"   ajax="false"  />
     		 	<p:commandButton  value="Book tickets" action="bookTickets"   ajax="false" rendered="#{flightC.cart.size() > 0 }"  />
     		 </h:panelGrid>
 			
