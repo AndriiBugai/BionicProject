@@ -98,16 +98,20 @@ public class FindFlightCustomer1 implements Serializable {
 	
 	// findFlightCustomer -> addTicket
 	public String addTicketToCart(String id) {
-		 number = Integer.valueOf(id);
-		 for(Flight f : list) {
-			 if(f.getId() == number) {
-				 flight = f;
-			 }
-		 }	 
-		 ticket= new Ticket();
-		 birthdate = null;
-		 error ="";
-		 return "addTicket";
+		if(list != null) {
+			number = Integer.valueOf(id);
+			for(Flight f : list) {
+				if(f.getId() == number) {
+					flight = f;
+				}
+			}
+			ticket= new Ticket();
+			birthdate = null;
+			error ="";
+			return "addTicket";
+		}
+		return "findFlightCustomer";
+
 	}
 	
 	// addTicket -> ticketCart
