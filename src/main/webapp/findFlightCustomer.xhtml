@@ -11,153 +11,157 @@
 <h:head>
 
 	<title>Find flights</title>
+	<h:outputStylesheet library="webjars" name="font-awesome/4.4.0/css/font-awesome-jsf.css" />
 </h:head>
 
 
 <h:body>
-	<h:outputStylesheet library="css" name="style.css" />
+	<h:outputStylesheet library="css" name="searchflight.css" />
+
+
 	<ui:composition template="WEB-INF/templatesCustomer/BasicTemplateCustomer.xhtml">
 		<ui:define name="content">
 
 			<div>
 						
-			<h:panelGrid columns="1"  >
-				<p:outputLabel  value="Search 11 flights" />
+			<h:panelGrid columns="1">
+
+
 			</h:panelGrid>
 
-				<h:form id="form1" >
+				<h:form id="form1">
 
+					<div class="menu">
 
-					<h:panelGrid columns="2">
-						<p:outputLabel  value="*Flying from" />
-						<p:outputLabel  value="*Flying to" />
+						<div class="transbox">
 
-						<p:inputText id="dcity" value="#{flightC.depatureCity}"  required="true" requiredMessage="#{flightC.depatureCityRequired}" size="28">
-						</p:inputText>
-						<p:inputText id="acity" value="#{flightC.arrivalCity}" required="true" requiredMessage="#{flightC.arrivalCityRequired}" size="28">
-						</p:inputText>
+						<h:outputStylesheet library="css" name="searchflight.css" />
+						<p:outputLabel styleClass="header" value="Search flights" />
 
-						<p:message for="dcity" errorStyle="color:red; display:block"/>
-						<p:message for="acity" errorStyle="color:red; display:block"/>
-					</h:panelGrid>
+							<br/>
+							<br/>
 
-					<h:panelGrid columns="1">
+							<h:panelGrid columns="2">
+							<p:outputLabel styleClass="helpingTitle"  value="Flying from" />
+							<p:outputLabel styleClass="helpingTitle"  value="Flying to" />
 
-					</h:panelGrid>
+							<p:inputText styleClass="inputText" id="dcity" value="#{flightC.depatureCity}"  required="true" requiredMessage="#{flightC.depatureCityRequired}" size="28">
+							</p:inputText>
+							<p:inputText styleClass="inputText" id="acity" value="#{flightC.arrivalCity}" required="true" requiredMessage="#{flightC.arrivalCityRequired}" size="28">
+							</p:inputText>
 
+							<p:message for="dcity" errorStyle="color:red; display:block"/>
+							<p:message for="acity" errorStyle="color:red; display:block"/>
+						</h:panelGrid>
 
-					<h:panelGrid columns="1" >
+						<h:panelGrid columns="1" >
 
-						<p:outputLabel  value="*Departuring" />
+							<p:outputLabel styleClass="helpingTitle"   value="Departuring" />
 
-						<p:calendar id="popup" value="#{flightC.depatureDate}" required="true" requiredMessage="#{flightC.departureDateRequired}" pattern="dd.MM.yyyy" />
-						<!--
-						<p:inputText id="ddate"  value="#{flightC.depatureDate}" required="true" requiredMessage="#{flightC.departureDateRequired}" size="28">
-							<f:convertDateTime pattern="dd.MM.yyyy" />
-						</p:inputText>
-						<p:message for="ddate" errorStyle="color:red; display:block"/>
-						-->
-						<p:message for="popup" errorStyle="color:red; display:block"/>
+							<p:calendar styleClass="inputText" id="popup" value="#{flightC.depatureDate}" required="true" requiredMessage="#{flightC.departureDateRequired}" pattern="dd.MM.yyyy" />
+							<!--
+							<p:inputText id="ddate"  value="#{flightC.depatureDate}" required="true" requiredMessage="#{flightC.departureDateRequired}" size="28">
+								<f:convertDateTime pattern="dd.MM.yyyy" />
+							</p:inputText>
+							<p:message for="ddate" errorStyle="color:red; display:block"/>
+							-->
+							<p:message for="popup" errorStyle="color:red; display:block"/>
 
-						<!--
-						<p:inputText id="adate"  value="#{flightC.departureDate2}"  size="28">
-							<f:convertDateTime pattern="dd.MM.yyyy" />
-						</p:inputText>
-						<p:message for="adate" errorStyle="color:red; display:block"/>
-						-->
+							<!--
+							<p:inputText id="adate"  value="#{flightC.departureDate2}"  size="28">
+								<f:convertDateTime pattern="dd.MM.yyyy" />
+							</p:inputText>
+							<p:message for="adate" errorStyle="color:red; display:block"/>
+							-->
 
-						<p:commandButton style=" float:left "  value="Find Flights" action="#{flightC.findFlightList}" ajax="false" size="90" />
+							<br/>
 
+							<p:commandButton style=" float:left "  value="Find Flights" action="#{flightC.findFlightList}" ajax="false" size="90" />
+						</h:panelGrid>
+						</div>
 
-
-
-
-
-
-
-					</h:panelGrid>				
-						
-						
-				 <h:panelGrid style="margin: 0 auto; font-size: 11pt;  "  >
-				 		
-				 </h:panelGrid>
+					</div>
 				    	
 			
 		<h:panelGrid columns="1" >
 
 
-					<p:dataTable rowIndexVar="row" var="flightItem" value="#{flightC.list}" rendered="#{flightC.list != null }">
-					 	<p:column headerText="Departure time"> 		
-								<h:outputText value="#{flightItem.departureTime}" >
-									<f:convertDateTime pattern="dd.MM.yyyy HH:mm" />
-								</h:outputText>					 
-						</p:column>
-						<p:column headerText=" Arrival time"> 		
-								<h:outputText value="#{flightItem.arrivalTime}">
-									<f:convertDateTime pattern="dd.MM.yyyy HH:mm" />
-								</h:outputText>				 
-						</p:column>
-						
-						<p:column headerText="Available First Class Tickets"> 		
-								<h:outputText value="#{flightItem.availableFirst}  / #{flightItem.firstClass} " />		 
-						</p:column>
-						
-						
-						<p:column headerText="Availble Ecomomy Class Tickets"> 		
-								<h:outputText value="#{flightItem.availableEconomy}  /  #{flightItem.economyClass}  " />		 
-						</p:column>
-						
-						
-
-						<p:column headerText="First price"> 		
-								<h:outputText value="#{flightItem.firstPrice} "/>		 
-						</p:column>
-						<p:column headerText="Ecomomy price"> 		
-								<h:outputText value="#{flightItem.economyPrice} "/>		 
-						</p:column>
-						<p:column headerText="" > 		
-								<p:commandButton  value="Select"  action="#{flightC.addTicketToCart(flightItem.id)}" ajax="false"  />	 
-						</p:column>					
-					</p:dataTable>
+			<p:dataTable rowIndexVar="row" var="flightItem" value="#{flightC.list}" rendered="#{flightC.list != null }">
+			</p:dataTable>
 
 
-			<ui:repeat  var="flightItem" value="#{flightC.list}" rendered="#{flightC.list != null}">
-
-				<br/>
-
-				<h:panelGrid columns="2">
+			<ui:repeat  rowIndexVar="row"  var="flightItem" value="#{flightC.list}" rendered="#{flightC.list != null}">
 
 
-				<h:graphicImage  library="images" name="Ukraine.png" width="80" height="30"  />
 
-				<h:panelGrid columns="4">
-					<h:outputText value="#{flightItem.departureTime}" >
-						<f:convertDateTime pattern="dd.MM.yyyy HH:mm" />
-					</h:outputText>
-					<h:outputText value="#{flightItem.arrivalTime}">
-						<f:convertDateTime pattern="dd.MM.yyyy HH:mm" />
-					</h:outputText>
-					<h:outputText value="First class price:" > </h:outputText>
-					<h:outputText value="#{flightItem.firstPrice}" > </h:outputText>
+				<div class="ticket" style="width: 70%">
+
+					<div style="width: 25%; display: inline-block;  vertical-align: top; " >
+						<h:graphicImage  library="images" name="Ukraine.png" width="80" height="30" /> <br/>
+						<h:outputText value="Ukrainian Airlines" > </h:outputText>
+					</div>
+
+					<div style="width: 49%; display: inline-block;  vertical-align: top; " >
+
+						<div>
+
+							<table>
+								<tr>
+									<td>
+										<h:outputText value="#{flightItem.depAirport.city}" > </h:outputText>
+										<h:outputText value=", " > </h:outputText>
+										<h:outputText value="#{flightItem.depAirport.name}" > </h:outputText>
+									</td>
+									<td style="padding-left: 15px; padding-right: 15px ;">
+										<h:panelGroup styleClass="ui-icon ui-icon-arrowthick-1-e" />
+									</td>
+									<td>
+										<h:outputText value="#{flightItem.destAirport.city}" > </h:outputText>
+										<h:outputText value=", " > </h:outputText>
+										<h:outputText value="#{flightItem.destAirport.name}" > </h:outputText>
+									</td>
+
+								</tr>
+
+								<tr class = "rowWithDate">
+									<td>
+										<h:outputText value="#{flightItem.departureTime}" >
+											<f:convertDateTime pattern="dd MMM, HH:mm" />
+										</h:outputText>
+									</td>
+									<td>
+									</td>
+									<td>
+										<h:outputText value="#{flightItem.arrivalTime}">
+											<f:convertDateTime pattern="dd MMM, HH:mm" />
+										</h:outputText>
+									</td>
+								</tr>
 
 
-					<h:outputText value=" " > </h:outputText>
-					<h:outputText value=" " > </h:outputText>
-					<h:outputText value="Second class price:" > </h:outputText>
-					<h:outputText value="#{flightItem.economyPrice}" > </h:outputText>
-
-					<h:outputText value=" " > </h:outputText>
-					<h:outputText value=" " > </h:outputText>
-					<h:outputText value=" " > </h:outputText>
-					<p:commandButton  value="Select"  action="#{flightC.addTicketToCart(flightItem.id)}" ajax="false"  />
-
-				</h:panelGrid>
 
 
-				</h:panelGrid>
+							</table>
 
-				<p:separator />
 
+						</div>
+
+
+
+						<div>
+
+						</div>
+
+
+					</div>
+
+					<div class="right" style="width: 25%; display: inline-block " >
+						<h:outputText value="First class price:" > </h:outputText> <br/>
+						<h:outputText value="#{flightItem.firstPrice}" > </h:outputText> <h:outputText value=" $" > </h:outputText> <br/>
+						<p:commandButton  value="Select"  action="#{flightC.addTicketToCart(flightItem.id)}" ajax="false"  />
+					</div>
+
+				</div>
 
 			</ui:repeat>
 
