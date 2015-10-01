@@ -8,15 +8,12 @@
 	
 	
 <body> 
-	<ui:composition> 
-	
-
+	<ui:composition>
 
 	
 	<h:panelGrid columns="3" cellpadding="5" style = "width: 100%;"  >
-		<h:graphicImage library="images" name="logo2.png" width="250" height="151" />
-	
-		
+
+
 		<h:panelGrid columns="1" cellpadding="5"   >
 			<p:outputLabel style = "margin: 0 auto; font-size: 20pt;  font-weight: bold;" value="Airline Booking Office" />
 
@@ -33,7 +30,7 @@
 	
 
 		
-		<h:form>	
+		<h:form style="">
 		
 		
 		
@@ -52,12 +49,7 @@
 			    <p:menuitem value="Help" outcome="help" style = "font-weight: 500;" icon="ui-icon-key">
 			        <f:param name="i" value="3" />
 			    </p:menuitem>
-			    
-<ui:remove>
-			    <p:menuitem value="Sign in" outcome="signIn" icon="ui-icon-key">
-			        <f:param name="i" value="3" />
-			    </p:menuitem>
-</ui:remove>
+
 			</p:tabMenu>
 				
 		</h:form>	

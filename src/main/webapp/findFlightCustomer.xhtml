@@ -22,7 +22,7 @@
 	<ui:composition template="WEB-INF/templatesCustomer/BasicTemplateCustomer.xhtml">
 		<ui:define name="content">
 
-			<div>
+			<div class="clr">
 						
 			<h:panelGrid columns="1">
 
@@ -33,51 +33,39 @@
 
 					<div class="menu">
 
-						<div class="transbox">
+						<div class="container" >
 
-						<h:outputStylesheet library="css" name="searchflight.css" />
-						<p:outputLabel styleClass="header" value="Search flights" />
+							<div class="transbox">
 
-							<br/>
-							<br/>
+							<h:outputStylesheet library="css" name="searchflight.css" />
+							<p:outputLabel styleClass="header" value="Search flights" />
+								<br/>
+								<br/>
 
-							<h:panelGrid columns="2">
-							<p:outputLabel styleClass="helpingTitle"  value="Flying from" />
-							<p:outputLabel styleClass="helpingTitle"  value="Flying to" />
+								<h:panelGrid columns="2">
+								<p:outputLabel styleClass="helpingTitle"  value="Flying from" />
+								<p:outputLabel styleClass="helpingTitle"  value="Flying to" />
 
-							<p:inputText styleClass="inputText" id="dcity" value="#{flightC.depatureCity}"  required="true" requiredMessage="#{flightC.depatureCityRequired}" size="28">
-							</p:inputText>
-							<p:inputText styleClass="inputText" id="acity" value="#{flightC.arrivalCity}" required="true" requiredMessage="#{flightC.arrivalCityRequired}" size="28">
-							</p:inputText>
+								<p:inputText styleClass="inputText" id="dcity" value="#{flightC.depatureCity}"  required="true" requiredMessage="#{flightC.depatureCityRequired}" size="28">
+								</p:inputText>
+								<p:inputText styleClass="inputText" id="acity" value="#{flightC.arrivalCity}" required="true" requiredMessage="#{flightC.arrivalCityRequired}" size="28">
+								</p:inputText>
 
-							<p:message for="dcity" errorStyle="color:red; display:block"/>
-							<p:message for="acity" errorStyle="color:red; display:block"/>
-						</h:panelGrid>
+								<p:message for="dcity" errorStyle="color:red; display:block"/>
+								<p:message for="acity" errorStyle="color:red; display:block"/>
+							</h:panelGrid>
 
-						<h:panelGrid columns="1" >
+							<h:panelGrid columns="1" >
 
-							<p:outputLabel styleClass="helpingTitle"   value="Departuring" />
+								<p:outputLabel styleClass="helpingTitle"   value="Departuring" />
+								<p:calendar styleClass="inputText" id="popup" value="#{flightC.depatureDate}" required="true" requiredMessage="#{flightC.departureDateRequired}" pattern="dd.MM.yyyy" />
+								<p:message for="popup" errorStyle="color:red; display:block"/>
 
-							<p:calendar styleClass="inputText" id="popup" value="#{flightC.depatureDate}" required="true" requiredMessage="#{flightC.departureDateRequired}" pattern="dd.MM.yyyy" />
-							<!--
-							<p:inputText id="ddate"  value="#{flightC.depatureDate}" required="true" requiredMessage="#{flightC.departureDateRequired}" size="28">
-								<f:convertDateTime pattern="dd.MM.yyyy" />
-							</p:inputText>
-							<p:message for="ddate" errorStyle="color:red; display:block"/>
-							-->
-							<p:message for="popup" errorStyle="color:red; display:block"/>
+								<br/>
 
-							<!--
-							<p:inputText id="adate"  value="#{flightC.departureDate2}"  size="28">
-								<f:convertDateTime pattern="dd.MM.yyyy" />
-							</p:inputText>
-							<p:message for="adate" errorStyle="color:red; display:block"/>
-							-->
-
-							<br/>
-
-							<p:commandButton style=" float:left "  value="Find Flights" action="#{flightC.findFlightList}" ajax="false" size="90" />
-						</h:panelGrid>
+								<p:commandButton style=" float:left "  value="Find Flights" action="#{flightC.findFlightList}" ajax="false" size="90" />
+							</h:panelGrid>
+							</div>
 						</div>
 
 					</div>
@@ -94,7 +82,7 @@
 
 
 
-				<div class="ticket" style="width: 70%">
+				<div class="ticket" style="width: 80%">
 
 					<div style="width: 25%; display: inline-block;  vertical-align: top; " >
 						<h:graphicImage  library="images" name="Ukraine.png" width="80" height="30" /> <br/>
