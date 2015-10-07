@@ -1,34 +1,36 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:tx="http://www.springframework.org/schema/tx"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:tx="http://www.springframework.org/schema/tx"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/beans/spring-beans-3.2.xsd 
 	http://www.springframework.org/schema/context 
 	http://www.springframework.org/schema/context/spring-context-3.2.xsd 
 	http://www.springframework.org/schema/tx 
 	http://www.springframework.org/schema/tx/spring-tx.xsd">
-	
+
 	<description>Example configuration to get you started.</description>
-	
+
 	<context:component-scan base-package="dao" />
-	<context:component-scan base-package="app" />
 	<context:component-scan base-package="entities" />
 	<context:component-scan base-package="edu.bionic.com" />
 	<context:component-scan base-package="service" />
-	<context:component-scan base-package="test" />
 	<context:component-scan base-package="managedBeans" />
 
-	<bean id="dataSource"
-		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="driverClassName" value="org.apache.derby.jdbc.EmbeddedDriver" />
-		<property name="url" value="jdbc:derby:/media/strapper/WORK/BionicProject/BookingDB;create=true" />
+
+
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="org.postgresql.Driver"/>
+		<property name="url" value="jdbc:postgresql://localhost:5432"/>
+		<property name="username" value="postgres"/>
+		<property name="password" value="1609"/>
 	</bean>
+
 	<bean id="entityManagerFactory"
-		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		  class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="packagesToScan" value="dao" />
 
-		
+
 		<property name="dataSource" ref="dataSource" />
 		<property name="persistenceUnitName" value="CashM" />
 		<property name="jpaDialect">
@@ -36,11 +38,11 @@
 		</property>
 		<property name="jpaVendorAdapter">
 			<bean
-				class="org.springframework.orm.jpa.vendor.EclipseLinkJpaVendorAdapter">
+					class="org.springframework.orm.jpa.vendor.EclipseLinkJpaVendorAdapter">
 				<property value="true" name="showSql" />
 				<property value="true" name="generateDdl" />
 				<property name="databasePlatform"
-					value="org.eclipse.persistence.platform.database.DerbyPlatform" />
+						  value="org.eclipse.persistence.platform.database.DerbyPlatform" />
 			</bean>
 		</property>
 		<property name="jpaPropertyMap">
@@ -53,6 +55,6 @@
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>
 	<bean
-		class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
+			class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
 	<tx:annotation-driven transaction-manager="transactionManager" />
 </beans>

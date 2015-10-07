@@ -26,7 +26,7 @@ table {
 	background-color: white;
 	margin: 0 auto;
 	margin-bottom: 10px;
-	border-bottom: 2px solid grey;
+	border-bottom: 1px solid lightgray;
 	border-radius: 3px;
 	padding: 6px;
 }
@@ -62,4 +62,9 @@ table {
 .container {
 	width: 80%;
 	margin: 0 auto;
+}
+
+.selectBtn {
+	font-size: 14px;
+	margin-top: 5px;
 }

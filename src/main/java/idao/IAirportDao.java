@@ -17,8 +17,5 @@ public interface IAirportDao {
 	List<Airport> getList();
 	List<Airport> getList(String city);
            
-    
-    
-    
-    
+
 }

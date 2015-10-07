@@ -117,36 +117,30 @@
 											<f:convertDateTime pattern="dd MMM, HH:mm" />
 										</h:outputText>
 									</td>
-									<td>
-									</td>
+
+									<td></td>
+
 									<td>
 										<h:outputText value="#{flightItem.arrivalTime}">
 											<f:convertDateTime pattern="dd MMM, HH:mm" />
 										</h:outputText>
 									</td>
 								</tr>
-
-
-
-
 							</table>
-
-
 						</div>
 
-
-
-						<div>
-
+							<div>
 						</div>
 
 
 					</div>
 
-					<div class="right" style="width: 25%; display: inline-block " >
+					<div class="right" style="width: 25%; display: inline-block; " >
+						<!--
 						<h:outputText value="First class price:" > </h:outputText> <br/>
-						<h:outputText value="#{flightItem.firstPrice}" > </h:outputText> <h:outputText value=" $" > </h:outputText> <br/>
-						<p:commandButton  value="Select"  action="#{flightC.addTicketToCart(flightItem.id)}" ajax="false"  />
+						-->
+						<h:outputText  value="$#{flightItem.firstPrice}" > </h:outputText> <br/>
+						<p:commandButton  styleClass="selectBtn" value="Select"   action="#{flightC.addTicketToCart(flightItem.id)}" ajax="false"  />
 					</div>
 
 				</div>
