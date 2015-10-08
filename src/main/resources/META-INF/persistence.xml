@@ -6,12 +6,12 @@
 		<provider>
 			org.eclipse.persistence.jpa.PersistenceProvider
 		</provider>
-    	<class>edu.bionic.com.Merchant</class>
     	<class>entities.Airport</class>
     	<class>entities.Customer</class>
     	<class>entities.Flight</class>
     	<class>entities.Staff</class>
    		<class>entities.Ticket</class>
+		<class>entities.Company</class>
    		 
     	<properties>
       	    <property name="javax.persistence.jdbc.driver" 

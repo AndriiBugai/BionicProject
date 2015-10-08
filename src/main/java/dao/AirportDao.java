@@ -10,7 +10,6 @@ import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Repository;
 
-import edu.bionic.com.Merchant;
 import entities.Airport;
 
 @Repository
@@ -24,9 +23,7 @@ public class AirportDao implements IAirportDao {
 	public void persist(Airport airport) {
 		// TODO Auto-generated method stub
 		if (airport != null){
-		
 			em.persist(airport);
-		
 		}
 	}
 	
