@@ -2,9 +2,13 @@ package iservice;
 
 import entities.Company;
 
+import java.util.List;
+
 /**
  * Created by strapper on 07.10.15.
  */
 public interface ICompanyService {
-    public void persist(Company company);
+    void persist(Company company);
+    List<Company> findCompanies(String name) ;
+    Company findById(int id);
 }

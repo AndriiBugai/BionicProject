@@ -86,21 +86,43 @@
 
 				
 						       
-	        </h:panelGrid>
+		</h:panelGrid>
 	        
-	        
-	        <h:panelGrid columns="2" style="margin-left: 300px;">
+		<h:panelGrid columns="2">
+			<h:outputText value="Airline" />
+			<p:inputText id="company" value="#{addflight1.company}"  size="28"/>
+			<p:commandButton  value="Search Airlines"  actionListener="#{addflight1.searchAirlines()}" ajax="false"  />
+		</h:panelGrid>
+
+		<h:panelGrid>
+			<p:dataTable var="company" value="#{addflight1.companyList}" rendered="#{addflight1.companyList != null}">
+				<p:column headerText="Name">
+					<h:outputText value="#{company.name}" />
+				</p:column>
+
+				<p:column headerText="Description">
+					<h:outputText value="#{company.description}" />
+				</p:column>
+
+				<p:column style="width: 25%" headerText="" >
+					<p:commandButton  value="Choose"  actionListener="#{addflight1.chooseCompany(company.id)}" ajax="false"  />
+				</p:column>
+
+			</p:dataTable>
+		</h:panelGrid>
+
+
+			<h:panelGrid columns="2" style="margin-left: 300px;">
 					<p:outputLabel value="Departure Airport:"  />
 					<p:outputLabel id="depName" value="#{addflight1.flight.depAirport.name}"  />
 					<p:outputLabel value="Arrival Airport:"  />
 					<p:outputLabel id="arrName" value="#{addflight1.flight.destAirport.name}"  />
 
-				</h:panelGrid>	
+			</h:panelGrid>
+
+
 	       </h:form> 
-	        
-	        
-	        
-	        
+
 	        <h:form style="margin: 0 auto">
 	        <h:panelGrid columns="3" style="margin-left: 300px;">
 				       			<p:outputLabel value="Departure Time" />

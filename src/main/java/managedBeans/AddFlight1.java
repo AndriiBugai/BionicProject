@@ -1,6 +1,8 @@
 package managedBeans;
 
+import entities.Company;
 import iservice.IAirportService;
+import iservice.ICompanyService;
 import iservice.IFlightService;
 
 import java.io.IOException;
@@ -40,6 +42,9 @@ public class AddFlight1 implements Serializable {
 	@Inject
 	private IFlightService fs;
 
+	@Inject
+	private ICompanyService cs;
+
 	@ManagedProperty(value="#{flight}")
 	private Flight flight;
 	@ManagedProperty(value="#{depDate}")
@@ -57,14 +62,30 @@ public class AddFlight1 implements Serializable {
 	
 	@ManagedProperty(value="#{dlist}")
 	private List<Airport> dlist;
+
+	public List<Company> getCompanyList() {
+		return companyList;
+	}
+
+	public void setCompanyList(List<Company> companyList) {
+		this.companyList = companyList;
+	}
+
+	@ManagedProperty(value="#{companyList}")
+	private List<Company> companyList;
 	
-	@ManagedProperty(value="#{depName")
+	@ManagedProperty(value="#{depName}")
 	private String depName;
-	@ManagedProperty(value="#{arrName")
+	@ManagedProperty(value="#{arrName}")
 	private String arrName;
-	@ManagedProperty(value="#{airportError")
+	@ManagedProperty(value="#{airportError}")
 	private String airportError;
-	
+
+
+	@ManagedProperty(value="#{company}")
+	private String company;
+
+
 	
 	private final String acityRequired = "Input the arrival city";
 	private final String dcityRequired = "Input the departure city";
@@ -77,6 +98,10 @@ public class AddFlight1 implements Serializable {
 	private final String flightNumberRequired = "Input the flight number";
 	private final String airportReqired = "Choose departure or arrival airport";
 	
+	public String searchAirlines() {
+		companyList = cs.findCompanies(company);
+		return "addFlight1";
+	}
 
 	public void checkRole() throws IOException  {
 		HttpSession session = Util.getSession();
@@ -137,6 +162,12 @@ public class AddFlight1 implements Serializable {
 		System.out.println(id);
 		Airport a = as.findById( Integer.valueOf(id));
 		flight.setDestAirport(a);
+		return "addFlight1";
+	}
+
+	public String chooseCompany(String id) {
+		Company company = cs.findById( Integer.valueOf(id));
+		flight.setCompany(company);
 		return "addFlight1";
 	}
 	
@@ -297,6 +328,13 @@ public class AddFlight1 implements Serializable {
 		this.fs = fs;
 	}
 
+	public String getCompany() {
+		return company;
+	}
+
+	public void setCompany(String company) {
+		this.company = company;
+	}
 
 	
 	

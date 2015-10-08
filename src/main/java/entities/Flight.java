@@ -31,8 +31,20 @@ public class Flight  {
 	@ManyToOne
 	@JoinColumn(name = "departureAirport")
 	private Airport depAirport;
-	
-	@Transient 
+
+	@ManyToOne
+	@JoinColumn(name = "company")
+	private Company company;
+
+	public Company getCompany() {
+		return company;
+	}
+
+	public void setCompany(Company company) {
+		this.company = company;
+	}
+
+	@Transient
 	private int availableEconomy;
 	@Transient 
 	private int availableFirst;
