@@ -1,7 +1,9 @@
 package iservice;
 
 import entities.Company;
+import org.primefaces.model.StreamedContent;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -9,6 +11,8 @@ import java.util.List;
  */
 public interface ICompanyService {
     void persist(Company company);
-    List<Company> findCompanies(String name) ;
+    List<Company> findCompanies() ;
     Company findById(int id);
+    void remove(int id);
+    StreamedContent getImage() throws IOException;
 }

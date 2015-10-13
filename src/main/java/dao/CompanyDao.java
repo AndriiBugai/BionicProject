@@ -42,14 +42,17 @@ public class CompanyDao implements ICompanyDao {
         // TODO Auto-generated method stub
         return em.find(Company.class, id);
     }
-
-    public List<Company> findCompanies(String name) {
+    @Override
+    public List<Company> findCompanies() {
         TypedQuery<Company> query = em.createQuery("SELECT c FROM Company c ", Company.class);
     //    TypedQuery<Company> query = em.createQuery("SELECT c FROM Company c where (c.name LIKE: param) ", Company.class);
     //    query.setParameter("param", name);  //
         List<Company> list = query.getResultList();
         return list;
     }
+
+
+
 
 
 }

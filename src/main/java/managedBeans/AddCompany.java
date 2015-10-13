@@ -5,16 +5,23 @@ import entities.Company;
 import iservice.ICompanyService;
 import org.apache.commons.io.IOUtils;
 import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 import org.primefaces.model.UploadedFile;
 import org.springframework.context.annotation.Scope;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.faces.event.PhaseId;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.http.HttpServletRequest;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Serializable;
 
 /**
  * Created by strapper on 07.10.15.
@@ -22,7 +29,7 @@ import java.io.InputStream;
 
 @Named(value = "addCompany")
 @Scope("session")
-public class AddCompany {
+public class AddCompany implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -32,43 +39,61 @@ public class AddCompany {
     public void handleFileUpload(FileUploadEvent event) {
         FacesMessage message = new FacesMessage("Succesful", event.getFile().getFileName() + " is uploaded.");
         FacesContext.getCurrentInstance().addMessage(null, message);
-        image = event.getFile();
-        System.out.println("iamge saved");
+        file = event.getFile();
+        image = file.getContents();
+//        image = new DefaultStreamedContent(new ByteArrayInputStream(arr), "image/png");
     }
-
 
     @ManagedProperty(value="#{name}")
     private String name;
     @ManagedProperty(value="#{description}")
     private String description;
+    @ManagedProperty(value="#{file}")
+    private UploadedFile file;
     @ManagedProperty(value="#{image}")
-    private UploadedFile image;
+    private byte[] image;
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
 
     private final String nameRequired = "Input a name";
     private final String descriptionRequired = "Input a description";
-    private final String imamgeRequired = "Input an imamge";
+    private final String imamgeRequired = "Input an file";
 
-    public String submit() {
+
+
+    public void destroyWorld() {
+        submit();
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "The new company has been successfully added"));
+    }
+
+
+    public void hello() {
+
+    }
+
+    public void submit() {
+        if(file == null) {
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Upload a logo for the company");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+            return ;
+        }
         Company company = new Company();
         company.setName(name);
         company.setDescription(description);
-        if(image != null) {
-            FacesMessage message = new FacesMessage("Succesful", image.getFileName() + " is uploaded.");
-            FacesContext.getCurrentInstance().addMessage(null, message);
-            System.out.println("Succesful" + image.getFileName() + " is uploaded.");
 
-        } else {
-            System.out.println("UnSuccesful" );
-        }
-        try {
-            InputStream is = image.getInputstream();
-            byte[] bytes = IOUtils.toByteArray(is);
-            company.setImage(bytes);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        company.setImage(image);
+
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Failed to add the company");
+        FacesContext.getCurrentInstance().addMessage(null, message);
+
         companyService.persist(company);
-        return "addCompany";
+
     }
 
     public String getNameRequired() {
@@ -92,11 +117,11 @@ public class AddCompany {
     public void setDescription(String description) {
         this.description = description;
     }
-    public UploadedFile getImage() {
-        return image;
+    public UploadedFile getFile() {
+        return file;
     }
-    public void setImage(UploadedFile image) {
-        this.image = image;
+    public void setFile(UploadedFile file) {
+        this.file = file;
     }
 
 }

@@ -1,13 +1,20 @@
 package service;
 
+
 import entities.Company;
 import idao.ICompanyDao;
 import iservice.ICompanyService;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.faces.context.FacesContext;
+import javax.faces.event.PhaseId;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.TypedQuery;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -25,11 +32,42 @@ public class CompanyService implements ICompanyService {
         companyDao.persist(company);
     }
 
-    public List<Company> findCompanies(String name) {
-        return companyDao.findCompanies(name);
+    @Override
+    public List<Company> findCompanies() {
+        List<Company> list = companyDao.findCompanies();
+        for(int i = 0; i < list.size(); i++) {
+            byte[] image = list.get(i).getImage();
+            StreamedContent img = new DefaultStreamedContent(new ByteArrayInputStream(image), "image/png");
+
+            list.get(i).setOutputImage(img);
+        }
+        return list;
     }
 
+    @Override
     public Company findById(int id) {
         return companyDao.findById(id);
     }
+
+    @Override
+    public void remove(int id) {
+        companyDao.remove(id);
+    }
+
+    public StreamedContent getImage() throws IOException {
+        FacesContext context = FacesContext.getCurrentInstance();
+
+        if (context.getCurrentPhaseId() == PhaseId.RENDER_RESPONSE) {
+            // So, we're rendering the HTML. Return a stub StreamedContent so that it will generate right URL.
+            return new DefaultStreamedContent();
+        }
+        else {
+            // So, browser is requesting the image. Return a real StreamedContent with the image bytes.
+            String studentId = context.getExternalContext().getRequestParameterMap().get("studentId");
+            Company student = findById(Integer.valueOf(studentId));
+            return new DefaultStreamedContent(new ByteArrayInputStream(student.getImage()));
+        }
+    }
+
+
 }

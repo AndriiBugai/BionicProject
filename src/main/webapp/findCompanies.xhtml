@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Add company</title>
+</h:head>
+
+<h:body>
+
+
+
+
+    <ui:composition template="WEB-INF/templatesAdmin/BasicTemplateAdmin.xhtml">
+        <ui:define name="content">
+
+            <h:form>
+                <p:commandButton  value="Find Companies" actionListener="#{findCompany.downloadCompanies}" ajax="false" />
+
+                <p:dataTable var="company" value="#{findCompany.companyList}" rendered="#{findCompany.companyList != null}">
+                    <p:column headerText="Name">
+                        <h:outputText value="#{company.name}" />
+                    </p:column>
+
+                    <p:column headerText="Description">
+                        <h:outputText value="#{company.description}" />
+                    </p:column>
+
+                    <p:column headerText="Logo">
+                        <p:graphicImage height="50" value="#{findCompany.image}">
+                            <f:param name="companyId" value="#{company.id}" />
+                        </p:graphicImage>
+                    </p:column>
+
+                    <p:column headerText="Color">
+
+                    </p:column>
+                </p:dataTable>
+
+
+            </h:form>
+
+
+
+        </ui:define>
+    </ui:composition>
+</h:body>
+</html>

@@ -8,40 +8,53 @@
       xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-    <title>Sign in</title>
+    <title>Add company</title>
 </h:head>
 
 <h:body>
+
+
+
+
     <ui:composition template="WEB-INF/templatesAdmin/BasicTemplateAdmin.xhtml">
         <ui:define name="content">
 
 
-            <f:metadata>
-                <!-- 		<f:viewAction phase="PROCESS_VALIDATIONS" action="#{airport1.checkRole}"/>    -->
-            </f:metadata>
 
-            <h:form style="margin: 0 auto">
+            <h:form id="form1" style="margin: 0 auto">
 
                 <h:panelGrid columns="3" style="margin: 0 auto; padding: 20px  ">
                     <p:outputLabel value="Name:" />
-                    <p:inputText id="name" value="#{addCompany.name}" required="true" requiredMessage="#{addCompany.nameRequired}" />
+                    <p:inputText size="30" id="name" value="#{addCompany.name}" required="true" requiredMessage="#{addCompany.nameRequired}" />
                     <p:message for="name" />
 
                     <p:outputLabel value="Description:" />
-                    <p:inputText id="description" value="#{addCompany.description}" required="true" requiredMessage="#{addCompany.descriptionRequired}" />
+                    <p:inputTextarea rows="6" cols="30" id="description" value="#{addCompany.description}" required="true" requiredMessage="#{addCompany.descriptionRequired}"  />
                     <p:message for="description" />
-
                 </h:panelGrid>
 
-                <h:form>
-                    <p:fileUpload fileUploadListener="#{addCompany.handleFileUpload}" mode="advanced" dragDropSupport="false"
-                                  update="messages" sizeLimit="100000" fileLimit="3" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
-                    <p:growl id="messages" showDetail="true" />
-                </h:form>
+                <p:outputLabel value="Company Logo:" />
+                <p:fileUpload fileUploadListener="#{addCompany.handleFileUpload}" mode="advanced" dragDropSupport="false"
+                              update="messages" sizeLimit="100000" fileLimit="3" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"  />
+                <p:growl id="messages" showDetail="true" />
 
                 <h:panelGrid style="margin: 0 auto; padding-bottom: 10px;" >
-                    <p:commandButton  value="Add company" id="ca" actionListener="#{addCompany.submit}" ajax="false" />
+                    <p:growl id="message" showDetail="true" />
+                    <p:commandButton value="Add company"  actionListener="#{addCompany.destroyWorld}" update="message" >
+                        <p:confirm header="Confirmation" message="Are you sure?" icon="ui-icon-alert" />
+                    </p:commandButton>
+
+                    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                        <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                    </p:confirmDialog>
                 </h:panelGrid>
+
+                <p:graphicImage value="#{addCompany.image}" />
+                <p:outputLabel value="#{addCompany.name}" />
+                <p:outputLabel value="#{addCompany.description}" />
+
+                <p:commandButton value="hello" actionListener="#{addCompany.hello}" />
 
 
 

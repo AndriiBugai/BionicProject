@@ -12,5 +12,5 @@ public interface ICompanyDao {
     void persist(Company company);
     void remove(int id);
     Company findById(int id);
-    List<Company> findCompanies(String name) ;
+    List<Company> findCompanies() ;
 }

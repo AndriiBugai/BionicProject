@@ -99,7 +99,7 @@ public class AddFlight1 implements Serializable {
 	private final String airportReqired = "Choose departure or arrival airport";
 	
 	public String searchAirlines() {
-		companyList = cs.findCompanies(company);
+	//	companyList = cs.findCompanies(company);
 		return "addFlight1";
 	}
 

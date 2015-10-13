@@ -1,9 +1,13 @@
 package entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
+
+import javax.faces.context.FacesContext;
+import javax.faces.event.PhaseId;
+import javax.persistence.*;
+
+import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.io.Serializable;
 
@@ -18,7 +22,29 @@ public class Company implements Serializable {
     private String name;
     private String descripton;
     private byte[] image;
+    @Transient
+    private StreamedContent outputImage;
 
+    public StreamedContent getOutputImage() {
+        return outputImage;
+    }
+
+    public void setOutputImage(StreamedContent outputImage) {
+        this.outputImage = outputImage;
+    }
+
+    public StreamedContent getConvertedImage() {
+        StreamedContent img = new DefaultStreamedContent(new ByteArrayInputStream(image), "image/png");
+        return img;
+    }
+
+    public String getDescripton() {
+        return descripton;
+    }
+
+    public void setDescripton(String descripton) {
+        this.descripton = descripton;
+    }
 
     public int getId() {
         return id;
