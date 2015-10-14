@@ -13,10 +13,6 @@
 
 <h:body>
 
-    <f:metadata>
-        <f:event type="preRenderView" listener="#{findCompany.downloadCompanies}"/>
-    </f:metadata>
-
 
     <ui:composition template="WEB-INF/templatesAdmin/BasicTemplateAdmin.xhtml">
         <ui:define name="content">
@@ -24,22 +20,23 @@
 
 
             <h:form styleClass="main">
-                <p:commandButton styleClass="nav-btn"  value="Add New Companiy" action="#{findCompany.addNewCompany}" ajax="false" />
+                <p:commandButton styleClass="nav-btn"  value="Download Airports" action="#{findAirport.downloadAirports}" ajax="false" />
+                <p:commandButton styleClass="nav-btn"  value="Add a new Airport" action="#{findAirport.addNewAirport}" ajax="false" />
 
 
-                <p:dataTable var="company" value="#{findCompany.companyList}" rendered="#{findCompany.companyList != null}">
-                    <p:column style="font-size: 16px" headerText="Name">
-                        <h:outputText value="#{company.name}" />
+                <p:dataTable styleClass="table" var="airport" value="#{findAirport.airportList}" rendered="#{findAirport.airportList != null}">
+
+                    <p:column headerText="Name">
+                        <h:outputText value="#{airport.name}" />
                     </p:column>
 
-                    <p:column headerText="Logo" style="width: 130px">
-                        <p:graphicImage width="120" value="#{findCompany.image}">
-                            <f:param name="companyId" value="#{company.id}" />
-                        </p:graphicImage>
+
+                    <p:column headerText="Description" >
+                        <h:outputText value="#{airport.city}"  />
                     </p:column>
 
-                    <p:column headerText="Description" style="width: 50%; text-align: justify">
-                        <h:outputText value="#{company.description}" style="font-size: 14px" />
+                    <p:column headerText="Country" >
+                        <h:outputText value="#{airport.country}"  />
                     </p:column>
 
 
@@ -47,7 +44,7 @@
 
                         <p:growl id="message" showDetail="true" />
 
-                        <p:commandButton value="Delete" action="#{findCompany.delete(company.id)}" update="message" >
+                        <p:commandButton styleClass="del-edit-btn" value="Delete" action="#{findAirport.delete(airport.id)}" update="message" >
                             <p:confirm header="Confirmation" message="Are you sure?" icon="ui-icon-alert" />
                         </p:commandButton>
 
@@ -56,7 +53,7 @@
                             <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
                         </p:confirmDialog>
 
-                        <p:commandButton value="Edit" action="#{findCompany.edit(company.id)}" update="message" />
+                        <p:commandButton value=" Edit " action="#{findAirport.edit(airport.id)}" update="message" />
 
 
                     </p:column>

@@ -10,29 +10,40 @@ import javax.inject.Named;
 
 import org.springframework.transaction.annotation.Transactional;
 
-import dao.AirportDao;
 import entities.Airport;
 
 @Named
 public class AirportService implements IAirportService  {
 
-	 @Inject
-	private IAirportDao ad;
-	
-	 public List<Airport> getList(){
-		 return ad.getList();
+	@Inject
+	private IAirportDao airportDao;
+
+	@Override
+	@Transactional
+	public void persist(Airport a) {
+		 airportDao.persist(a);
 	 }
-	 
-	 public List<Airport> getList(String city){
-		 return ad.getList(city);
+
+	@Override
+	@Transactional
+	public void remove(int id) {
+		airportDao.remove(id);
+	}
+
+	@Override
+	public Airport findById(int id) {
+		 return airportDao.findById(id);
 	 }
-	 
-	 @Transactional
-	 public void persist(Airport a) {
-		 ad.persist(a);
-	 }
-	 
-	 public Airport findById(int id) {
-		 return ad.findById(id);
-	 }
+
+	@Override
+	public List<Airport> findAirports() {
+		return airportDao.findAirports();
+	}
+
+	@Override
+	public List<Airport> findAirports(String city) {
+		return airportDao.findAirports(city);
+	}
+
+
 }

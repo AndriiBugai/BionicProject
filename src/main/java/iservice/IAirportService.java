@@ -5,11 +5,15 @@ package iservice;
 import java.util.List;
 
 import entities.Airport;
+import entities.Company;
 
 public interface IAirportService {
 	
-	 public List<Airport> getList(); 
-	 public List<Airport> getList(String city); 
-	 public void persist(Airport a); 
-	 public Airport findById(int id);
+	void persist(Airport a);
+	void remove(int id);
+	Airport findById(int id);
+	List<Airport> findAirports();
+	List<Airport> findAirports(String city);
+
+
 }

@@ -33,6 +33,23 @@ public class CompanyService implements ICompanyService {
     }
 
     @Override
+    @Transactional
+    public void update(Company company) { companyDao.update(company);}
+
+    @Override
+    @Transactional
+    public void remove(int id) {
+        companyDao.remove(id);
+    }
+
+    @Override
+    public Company findById(int id) {
+        return companyDao.findById(id);
+    }
+
+
+
+    @Override
     public List<Company> findCompanies() {
         List<Company> list = companyDao.findCompanies();
         for(int i = 0; i < list.size(); i++) {
@@ -44,15 +61,7 @@ public class CompanyService implements ICompanyService {
         return list;
     }
 
-    @Override
-    public Company findById(int id) {
-        return companyDao.findById(id);
-    }
 
-    @Override
-    public void remove(int id) {
-        companyDao.remove(id);
-    }
 
     public StreamedContent getImage() throws IOException {
         FacesContext context = FacesContext.getCurrentInstance();
@@ -68,6 +77,13 @@ public class CompanyService implements ICompanyService {
             return new DefaultStreamedContent(new ByteArrayInputStream(student.getImage()));
         }
     }
+
+    @Transactional
+    public void updateImage(int id, byte[] array) {
+        companyDao.updateImage(id, array);
+    }
+
+
 
 
 }

@@ -9,6 +9,9 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaUpdate;
+import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +27,20 @@ public class CompanyDao implements ICompanyDao {
     @Override
     public void persist(Company company) {
         if (company != null){
+            System.out.println(company.getImage().length);
             em.persist(company);
+
+        }
+    }
+
+    @Override
+    public void update(Company company) {
+        // TODO Auto-generated method stub
+        if (company != null){
+            System.out.println(company.getImage().length) ;
+            em.merge(company);
+
+
         }
     }
 
@@ -32,9 +48,7 @@ public class CompanyDao implements ICompanyDao {
     public void remove(int id) {
         // TODO Auto-generated method stub
         Company entity = em.find(Company.class, id);
-        em.getTransaction().begin();
         em.remove(entity);
-        em.getTransaction().commit();
     }
 
     @Override
@@ -50,6 +64,20 @@ public class CompanyDao implements ICompanyDao {
         List<Company> list = query.getResultList();
         return list;
     }
+
+    public void updateImage(int id, byte[] array) {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaUpdate<Company> updateCriteria = cb.createCriteriaUpdate(Company.class);
+        Root<Company> root = updateCriteria.from(Company.class);
+// update dateOfBirth property
+        updateCriteria.set(root.get("image"), array);
+// set where clause
+        updateCriteria.where(cb.equal(root.get("id"), id));
+// update
+        int affected = em.createQuery(updateCriteria).executeUpdate();
+        System.out.println("Affected row: " + affected);
+    }
+
 
 
 

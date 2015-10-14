@@ -14,8 +14,8 @@ public interface IAirportDao {
     void remove(int id);
 //    void update(Airport airport);    
     Airport findById(int id);
-	List<Airport> getList();
-	List<Airport> getList(String city);
+	List<Airport> findAirports();
+	List<Airport> findAirports(String city);
            
 
 }

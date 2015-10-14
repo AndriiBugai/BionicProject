@@ -11,8 +11,11 @@ import java.util.List;
  */
 public interface ICompanyService {
     void persist(Company company);
-    List<Company> findCompanies() ;
-    Company findById(int id);
+    void update(Company company);
     void remove(int id);
+    Company findById(int id);
+
+    List<Company> findCompanies() ;
     StreamedContent getImage() throws IOException;
+    public void updateImage(int id, byte[] array);
 }

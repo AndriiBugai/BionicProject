@@ -18,10 +18,13 @@
 
     <ui:composition template="WEB-INF/templatesAdmin/BasicTemplateAdmin.xhtml">
         <ui:define name="content">
+            <h:outputStylesheet library="css" name="admin.css" />
 
+            <h:form styleClass="main">
+                <p:commandButton styleClass="nav-btn"  value="Back to Companies list" action="#{addCompany.backToList}" ajax="false" />
+            </h:form>
 
-
-            <h:form id="form1" style="margin: 0 auto">
+            <h:form id="form1" styleClass="main" style="margin: 0 auto">
 
                 <h:panelGrid columns="3" style="margin: 0 auto; padding: 20px  ">
                     <p:outputLabel value="Name:" />
@@ -33,10 +36,12 @@
                     <p:message for="description" />
                 </h:panelGrid>
 
-                <p:outputLabel value="Company Logo:" />
-                <p:fileUpload fileUploadListener="#{addCompany.handleFileUpload}" mode="advanced" dragDropSupport="false"
-                              update="messages" sizeLimit="100000" fileLimit="3" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"  />
-                <p:growl id="messages" showDetail="true" />
+
+                    <p:outputLabel value="Company Logo:" />
+                    <p:fileUpload fileUploadListener="#{addCompany.handleFileUpload}" mode="advanced" dragDropSupport="false"
+                                  update="messages" sizeLimit="100000" fileLimit="3" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"  />
+                    <p:growl id="messages" showDetail="true" />
+
 
                 <h:panelGrid style="margin: 0 auto; padding-bottom: 10px;" >
                     <p:growl id="message" showDetail="true" />
@@ -49,13 +54,6 @@
                         <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
                     </p:confirmDialog>
                 </h:panelGrid>
-
-                <p:graphicImage value="#{addCompany.image}" />
-                <p:outputLabel value="#{addCompany.name}" />
-                <p:outputLabel value="#{addCompany.description}" />
-
-                <p:commandButton value="hello" actionListener="#{addCompany.hello}" />
-
 
 
 

@@ -6,11 +6,13 @@ import java.io.IOException;
 import java.io.Serializable;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.context.annotation.Scope;
@@ -49,15 +51,31 @@ public class CreateAirport1 implements Serializable {
 		}
 	}
 	
-	public String submit() {
+	public String submit() throws IOException {
 		Airport a =new Airport();
 		a.setCity(city);
 		a.setCountry(country);
 		a.setName(name);
 		as.persist(a);
+		clearFields();
+		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+		ec.redirect(((HttpServletRequest) ec.getRequest()).getRequestURI());
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "The new airport has been successfully added"));
 		return "createAirport";
+
 	}
-	
+
+	private void clearFields() {
+		city = "";
+		country = "";
+		name = "";
+	}
+
+	public String backToList() {
+		return "findAirports";
+	}
+
+
 	public String getCity() {
 		return city;
 	}

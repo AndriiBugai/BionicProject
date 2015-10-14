@@ -146,8 +146,8 @@ public class AddFlight1 implements Serializable {
 	}
 	
 	public String findAirports() {
-		dlist = as.getList(dCity);
-		alist = as.getList(aCity);
+		dlist = as.findAirports(dCity);
+		alist = as.findAirports(aCity);
 		return "addFlight1";
 	}
 

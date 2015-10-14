@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Add company</title>
+</h:head>
+
+<h:body>
+
+
+
+
+    <ui:composition template="WEB-INF/templatesAdmin/BasicTemplateAdmin.xhtml">
+        <ui:define name="content">
+
+
+
+            <h:form id="form1" style="margin: 0 auto">
+
+                <h:panelGrid columns="3" style="margin: 0 auto; padding: 20px  ">
+                    <p:outputLabel value="Name:" />
+                    <p:inputText size="30" id="name" value="#{editCompany.company.name}" required="true" requiredMessage="#{editCompany.nameRequired}" />
+                    <p:message for="name" />
+
+                    <p:outputLabel value="Description:" />
+                    <p:inputTextarea rows="6" cols="30" id="description" value="#{editCompany.company.description}" required="true" requiredMessage="#{editCompany.descriptionRequired}"  />
+                    <p:message for="description" />
+
+                    <p:outputLabel value="Image:" />
+                    <p:graphicImage width="300" value="#{editCompany.image}">
+                        <f:param name="companyId" value="#{editCompany.company.id}" />
+                    </p:graphicImage>
+
+
+
+
+
+                </h:panelGrid>
+
+                <p:fileUpload fileUploadListener="#{editCompany.handleFileUpload}" mode="advanced" dragDropSupport="false"
+                              update="messages" sizeLimit="100000" fileLimit="3" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"  />
+                <p:growl id="messages" showDetail="true" />
+
+
+                <p:commandButton value="Save changes" actionListener="#{editCompany.update}" />
+                <p:commandButton value="Back to company list" action="#{editCompany.backToList}" />
+
+
+
+
+            </h:form>
+
+        </ui:define>
+    </ui:composition>
+</h:body>
+</html>

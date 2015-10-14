@@ -14,30 +14,43 @@
 <h:body>
 	<ui:composition template="WEB-INF/templatesAdmin/BasicTemplateAdmin.xhtml">
 	<ui:define name="content">
-	
-	
-	<f:metadata>
- <!-- 		<f:viewAction phase="PROCESS_VALIDATIONS" action="#{airport1.checkRole}"/>    -->	
-	</f:metadata>
-	
-		<h:form style="margin: 0 auto">
-		
+		<h:outputStylesheet library="css" name="admin.css" />
+
+		<h:form styleClass="main">
+			<p:commandButton styleClass="nav-btn"  value="Back to Airports list" action="#{airport1.backToList}" ajax="false" />
+		</h:form>
+
+
+		<h:form styleClass="main" style="margin: 0 auto">
+
 			<h:panelGrid columns="3" style="margin: 0 auto; padding: 20px  ">					
 				<p:outputLabel value="City:" />
-				<p:inputText id="city" value="#{airport1.city}" required="true" requiredMessage="#{airport1.cityRequired}" />
+				<p:inputText size="40" id="city" value="#{airport1.city}" required="true" requiredMessage="#{airport1.cityRequired}" />
 				<p:message for="city" />
 				
 				<p:outputLabel value="Country:" />
-		        <p:inputText id="country" value="#{airport1.country}" required="true" requiredMessage="#{airport1.countryRequired}" />
+		        <p:inputText size="40" id="country" value="#{airport1.country}" required="true" requiredMessage="#{airport1.countryRequired}" />
 		        <p:message for="country" />
 		        
 		        <p:outputLabel value="Name:" />
-		        <p:inputText id="name" value="#{airport1.name}" required="true" requiredMessage="#{airport1.nameRequired}" />
+		        <p:inputText size="40" id="name" value="#{airport1.name}" required="true" requiredMessage="#{airport1.nameRequired}" />
 		        <p:message for="name" />	        
 	        </h:panelGrid>
 	      
 	        <h:panelGrid style="margin: 0 auto; padding-bottom: 10px;" >
-	     	   <p:commandButton  value="Create Airport" id="ca" actionListener="#{airport1.submit}" ajax="false" />
+
+				<p:growl id="message" showDetail="true" />
+
+				<p:commandButton styleClass="del-edit-btn" value="Create Airport" action="#{airport1.submit}" update="message">
+					<p:confirm header="Confirmation" message="Are you sure you want to add the airport?" icon="ui-icon-alert" />
+				</p:commandButton>
+
+				<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+					<p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+					<p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+				</p:confirmDialog>
+
+
 	        </h:panelGrid>
 	        	        
       	</h:form>

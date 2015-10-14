@@ -73,8 +73,8 @@ public class AddCompany implements Serializable {
     }
 
 
-    public void hello() {
-
+    public String backToList() {
+        return "findCompanies";
     }
 
     public void submit() {
@@ -86,14 +86,8 @@ public class AddCompany implements Serializable {
         Company company = new Company();
         company.setName(name);
         company.setDescription(description);
-
         company.setImage(image);
-
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Failed to add the company");
-        FacesContext.getCurrentInstance().addMessage(null, message);
-
         companyService.persist(company);
-
     }
 
     public String getNameRequired() {

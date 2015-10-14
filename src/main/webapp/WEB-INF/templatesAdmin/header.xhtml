@@ -26,11 +26,14 @@
 			    <p:menuitem value="Convert tickets" outcome="convertTickets" icon="ui-icon-arrowreturnthick-1-s">
 			        <f:param name="i" value="2" />
 			    </p:menuitem>
-			    <p:menuitem value="Add an Airport" outcome="createAirport" icon="ui-icon-plusthick">
+			    <p:menuitem value="Airports" outcome="findAirports" icon="ui-icon-plusthick">
 			        <f:param name="i" value="3" />
 			    </p:menuitem>
+				<p:menuitem value="Companies" outcome="findCompanies" icon="ui-icon-plusthick">
+					<f:param name="i" value="4" />
+				</p:menuitem>
 			    <p:menuitem value="Sign out" action="#{signin1.signOut}"  icon="ui-icon-plusthick">
-			        <f:param name="i" value="4" />    
+			        <f:param name="i" value="5" />
 			    </p:menuitem>
 	
 			</p:tabMenu>

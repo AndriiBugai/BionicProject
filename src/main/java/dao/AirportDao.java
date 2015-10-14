@@ -30,8 +30,8 @@ public class AirportDao implements IAirportDao {
 	@Override
 	public void remove(int id) {
 		// TODO Auto-generated method stub
-		Airport entity = em.find(Airport.class, id); 
-		
+		Airport entity = em.find(Airport.class, id);
+
 			em.remove(entity);
 		
 	}
@@ -43,20 +43,15 @@ public class AirportDao implements IAirportDao {
 
 	}
 	
-	public List<Airport> getList() {
+	public List<Airport> findAirports() {
 		// TODO Auto-generated method stub
 		 List<Airport> list = null;
 		 TypedQuery<Airport> query =  	em.createQuery("SELECT a FROM Airport a", 	Airport.class);
 		 list = query.getResultList();
-		 for(Airport a : list) {
-			 System.out.println(a.getStringForPrint());
-		 }
-		 
 		 return list;
-
 	}
 	
-	public List<Airport> getList(String city) {
+	public List<Airport> findAirports(String city) {
 		// TODO Auto-generated method stub
 		 List<Airport> list = null;
 		 TypedQuery<Airport> query =  	em.createQuery("SELECT a FROM Airport a where a.city = :city", 	Airport.class);
@@ -65,9 +60,7 @@ public class AirportDao implements IAirportDao {
 		 for(Airport a : list) {
 			 System.out.println(a.getStringForPrint());
 		 }
-		 
 		 return list;
-
 	}
 	
 	public void finalize() {

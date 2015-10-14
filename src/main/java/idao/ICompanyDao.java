@@ -10,7 +10,10 @@ import java.util.List;
  */
 public interface ICompanyDao {
     void persist(Company company);
+    void update(Company company);
     void remove(int id);
     Company findById(int id);
+
     List<Company> findCompanies() ;
+    void updateImage(int id, byte[] array);
 }

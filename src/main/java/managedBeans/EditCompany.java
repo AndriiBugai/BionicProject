@@ -2,84 +2,72 @@ package managedBeans;
 
 import entities.Company;
 import iservice.ICompanyService;
+import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
+import org.primefaces.model.UploadedFile;
 import org.springframework.context.annotation.Scope;
 
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.PhaseId;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.servlet.http.HttpServletRequest;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.List;
 
 /**
- * Created by strapper on 13.10.15.
+ * Created by strapper on 14.10.15.
  */
-@Named(value = "findCompany")
+
+@Named(value = "editCompany")
 @Scope("session")
-public class FindCompanies implements Serializable {
+public class EditCompany implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Inject
     ICompanyService companyService;
 
-    @Inject
-    EditCompany editCompany;
+    @ManagedProperty(value="#{company}")
+    Company company;
+    @ManagedProperty(value="#{image}")
+    private byte[] image;
 
-    @ManagedProperty(value="#{companyList}")
-    private List<Company> companyList;
+    private final String nameRequired = "Input a name";
+    private final String descriptionRequired = "Input a description";
+    private final String imamgeRequired = "Input an file";
 
-    public void downloadCompanies() {
-        companyList = companyService.findCompanies();
+    public void update() {
+        System.out.println("commit");
+        company.setImage(image);
+        companyService.updateImage(company.getId(), image);
+     //   companyService.update(company);
+ //       companyService.persist(company);
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Changes are saved!"));
     }
 
-    public byte[] getImage(int studentId) {
-        return companyService.findById(studentId).getImage();
-    }
-
-
-    public void addMessage(String summary, String detail) {
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, detail);
+    public void handleFileUpload(FileUploadEvent event) {
+        FacesMessage message = new FacesMessage("Succesful", event.getFile().getFileName() + " is uploaded.");
         FacesContext.getCurrentInstance().addMessage(null, message);
+        UploadedFile file = event.getFile();
+        image = file.getContents();
+        System.out.println("hello");
     }
 
-
-    public List<Company> getCompanyList() {
-        return companyList;
+    public Company getCompany() {
+        return company;
     }
 
-    public void setCompanyList(List<Company> companyList) {
-        this.companyList = companyList;
+    public String backToList() {
+        return "findCompanies";
     }
 
-    public String delete(int id) throws IOException {
-        companyService.remove(id);
-        downloadCompanies();
-        addMessage("System Error", "Please try again later.");
-        ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
-        ec.redirect(((HttpServletRequest) ec.getRequest()).getRequestURI());
-        return "findCompany";
+    public void setCompany(Company company) {
+        this.company = company;
     }
-
-    public String edit(int id) {
-        Company copmany = companyService.findById(id);
-        editCompany.setCompany(copmany);
-        return "editCompany";
-    }
-
-    public String addNewCompany() {
-        return "addCompany";
-    }
-
 
     public StreamedContent getImage() throws IOException {
         FacesContext context = FacesContext.getCurrentInstance();
