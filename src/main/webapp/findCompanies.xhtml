@@ -32,31 +32,31 @@
                         <h:outputText value="#{company.name}" />
                     </p:column>
 
-                    <p:column headerText="Logo" style="width: 130px">
+                    <p:column headerText="Logo" style="width: 150px; text-align : center">
                         <p:graphicImage width="120" value="#{findCompany.image}">
                             <f:param name="companyId" value="#{company.id}" />
                         </p:graphicImage>
                     </p:column>
 
-                    <p:column headerText="Description" style="width: 50%; text-align: justify">
-                        <h:outputText value="#{company.description}" style="font-size: 14px" />
+                    <p:column headerText="Description" style="width: 50%;  padding-right: 20px; padding-left: 20px ">
+                        <h:outputText value="#{company.description}" style="font-size: 14px;text-align: justify; " />
                     </p:column>
 
 
-                    <p:column headerText="">
+                    <p:column style="width: 120px; text-align : center" headerText="">
 
                         <p:growl id="message" showDetail="true" />
 
-                        <p:commandButton value="Delete" action="#{findCompany.delete(company.id)}" update="message" >
+                        <p:commandButton styleClass="del-btn" value="Delete" action="#{findCompany.delete(company.id)}" update="message" >
                             <p:confirm header="Confirmation" message="Are you sure?" icon="ui-icon-alert" />
                         </p:commandButton>
 
-                        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                        <p:confirmDialog  global="true" showEffect="fade" hideEffect="fade">
                             <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
                             <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
                         </p:confirmDialog>
 
-                        <p:commandButton value="Edit" action="#{findCompany.edit(company.id)}" update="message" />
+                        <p:commandButton styleClass="edit-btn" value="Edit" action="#{findCompany.edit(company.id)}" update="message" />
 
 
                     </p:column>

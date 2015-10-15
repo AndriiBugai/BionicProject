@@ -7,10 +7,32 @@
 }
 
 
-.del-edit-btn {
-    margin-right: 10px;
+.del-btn {
+
+    margin-bottom: 5px;
     font-size: 14px;
+    width: 90px;
 }
+
+.edit-btn {
+
+    font-size: 14px;
+    width: 90px;
+}
+
+.del-btn2 {
+
+    margin-right: 5px;
+    font-size: 14px;
+    width: 90px;
+}
+
+.edit-btn2 {
+    font-size: 14px;
+    width: 90px;
+}
+
+
 
 .main th {
     font-size: 16px;

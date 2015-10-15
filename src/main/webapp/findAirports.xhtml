@@ -40,11 +40,11 @@
                     </p:column>
 
 
-                    <p:column headerText="">
+                    <p:column style="width: 210px; text-align: center" headerText="">
 
                         <p:growl id="message" showDetail="true" />
 
-                        <p:commandButton styleClass="del-edit-btn" value="Delete" action="#{findAirport.delete(airport.id)}" update="message" >
+                        <p:commandButton styleClass="del-btn2" value="Delete" action="#{findAirport.delete(airport.id)}" update="message" >
                             <p:confirm header="Confirmation" message="Are you sure?" icon="ui-icon-alert" />
                         </p:commandButton>
 
@@ -53,7 +53,7 @@
                             <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
                         </p:confirmDialog>
 
-                        <p:commandButton value=" Edit " action="#{findAirport.edit(airport.id)}" update="message" />
+                        <p:commandButton styleClass="edit-btn2" value=" Edit " action="#{findAirport.edit(airport.id)}" update="message" />
 
 
                     </p:column>

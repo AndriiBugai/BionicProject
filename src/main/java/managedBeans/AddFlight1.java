@@ -71,8 +71,7 @@ public class AddFlight1 implements Serializable {
 		this.companyList = companyList;
 	}
 
-	@ManagedProperty(value="#{companyList}")
-	private List<Company> companyList;
+
 	
 	@ManagedProperty(value="#{depName}")
 	private String depName;
@@ -82,8 +81,15 @@ public class AddFlight1 implements Serializable {
 	private String airportError;
 
 
+
+	@ManagedProperty(value="#{companyList}")
+	private List<Company> companyList;
+
 	@ManagedProperty(value="#{company}")
 	private String company;
+
+
+
 
 
 	
@@ -97,6 +103,13 @@ public class AddFlight1 implements Serializable {
 	private final String economyPriceRequired = "Input the price for an economy class ticket";
 	private final String flightNumberRequired = "Input the flight number";
 	private final String airportReqired = "Choose departure or arrival airport";
+	private final String companyReqired = "Choose the airline company";
+
+	public String getCompanyReqired() {
+		return companyReqired;
+	}
+
+
 	
 	public String searchAirlines() {
 	//	companyList = cs.findCompanies(company);
@@ -148,6 +161,11 @@ public class AddFlight1 implements Serializable {
 	public String findAirports() {
 		dlist = as.findAirports(dCity);
 		alist = as.findAirports(aCity);
+		return "addFlight1";
+	}
+
+	public String findCompanies() {
+		companyList = cs.findCompanies();
 		return "addFlight1";
 	}
 
