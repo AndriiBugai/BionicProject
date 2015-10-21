@@ -15,11 +15,13 @@
 	<ui:composition template="WEB-INF/templatesAccountant/BasicTemplateAccountant.xhtml">
 	<ui:define name="content">
 
-<!--	
-	<f:metadata>
-  		<f:viewAction phase="PROCESS_VALIDATIONS" action="#{acc.checkRole}"/>
-	</f:metadata>
--->		
+
+
+		<f:metadata>
+			<f:event type="preRenderView" listener="#{acc.checkRole2}" />
+		</f:metadata>
+
+
 		<h:form style="margin: 0 auto">
 		
 			<h:panelGrid columns="3" style="margin: 0 auto; padding: 20px  ">					

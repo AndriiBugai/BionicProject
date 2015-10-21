@@ -17,109 +17,111 @@
 
 	<ui:composition template="WEB-INF/templatesAdmin/BasicTemplateAdmin.xhtml">
 	<ui:define name="content">
+
+		<f:metadata>
+			<f:event type="preRenderView" listener="#{addflight1.checkRole}" />
+		</f:metadata>
+
+		<h:outputStylesheet library="css" name="addFlight.css" />
+
+		<div class="main">
 	
 
 		<h:form style="margin: 0 auto">
 		<p:growl id="growl" showDetail="true" sticky="true" />  
 
-			<h:panelGrid columns="4" style="margin: 0 auto; padding-top: 20px; padding-bottom: 10px; width=100%  ">
-						
-		
-				
-					<p:outputLabel value="Flying from:"  />
-					<p:inputText id="dcity" value="#{addflight1.dcity}"  required="true" requiredMessage="#{addflight1.dcityRequired}" size="28"/>		
-					<p:outputLabel value="Flying to:" />
-					<p:inputText id="acity" value="#{addflight1.acity}"  required="true" requiredMessage="#{addflight1.acityRequired}" size="28"/>
-					
-					<p:commandButton  value="Find Airports" id="fd" actionListener="#{addflight1.findAirports}" ajax="false" />
-					<p:message for="dcity" />
-					<h:message />
-					<p:message for="acity" />
-				
-									
-			</h:panelGrid>
+			<h:panelGrid columns="3" style="margin: 0 auto; padding-top: 20px; padding-bottom: 10px; width=100%  ">
 
+				<p:outputLabel value="Flying from:"  />
+				<p:inputText id="dcity" value="#{addflight1.dcity}"  required="true" requiredMessage="#{addflight1.dcityRequired}" size="28"/>
+				<p:message for="dcity" />
 
-
-	
-
-		
-		
-			<h:panelGrid styleClass="foo" columns="2" style="margin: 0 auto; ">
-					<p:dataTable var="depAirport" value="#{addflight1.dlist}" rendered="#{addflight1.dList != null}">
-						<p:column headerText="Country">
-							<h:outputText value="#{depAirport.country}" />
-						</p:column>
-
-						<p:column headerText="City">
-							<h:outputText value="#{depAirport.city}" />
-						</p:column>
-
-						<p:column headerText="Name">
-							<h:outputText value="#{depAirport.name}" />
-						</p:column>
-
-						<p:column style="width: 25%" headerText="" >
-							<p:commandButton  value="Choose"  actionListener="#{addflight1.chooseDeparture(depAirport.id)}" ajax="false"  />
-						</p:column>
-
-					</p:dataTable>
-
-
-					<p:dataTable style="margin-top: 0" var="arrAirport" value="#{addflight1.alist}" rendered="#{addflight1.aList != null}">
-						<p:column headerText="Country">
-							<h:outputText value="#{arrAirport.country}" />
-						</p:column>
-
-						<p:column headerText="City">
-							<h:outputText value="#{arrAirport.city}" />
-						</p:column>
-
-						<p:column headerText="Name">
-							<h:outputText value="#{arrAirport.name}" />
-						</p:column>
-						<p:column style="width: 25%" headerText="" >
-							<p:commandButton    value="Choose"  actionListener="#{addflight1.chooseArrival(arrAirport.id)}"  ajax="false" />
-						</p:column>
-					</p:dataTable>
-			</h:panelGrid>
-
-			<h:panelGrid columns="2" style="margin: 0 auto; padding-top: 20px; padding-bottom: 10px; width=100%  ">
+				<p:outputLabel value="Flying to:" />
+				<p:inputText id="acity" value="#{addflight1.acity}"  required="true" requiredMessage="#{addflight1.acityRequired}" size="28"/>
+				<p:message for="acity" />
 
 				<p:outputLabel value="Airline name:"  />
 				<p:inputText id="company" value="#{addflight1.company}"  required="true" requiredMessage="#{addflight1.companyReqired}" size="28"/>
-				<h:message />
 				<p:message for="company" />
 
-				<p:commandButton  value="Find Airlines" id="fa" actionListener="#{addflight1.findCompanies}" ajax="false" />
+				<p:commandButton  value="Find Airports" id="fd" actionListener="#{addflight1.findAirports}" ajax="false" />
 
 			</h:panelGrid>
 
-			<p:dataTable var="company" value="#{addflight1.companyList}" rendered="#{addflight1.companyList != null}">
-				<p:column headerText="name">
+
+			<p:outputLabel styleClass="table-title" value="Choose departure airport:"  />
+			<p:dataTable styleClass="table-value" var="depAirport" value="#{addflight1.dlist}" rendered="#{addflight1.dList != null}">
+				<p:column headerText="Country">
+					<h:outputText value="#{depAirport.country}" />
+				</p:column>
+
+				<p:column headerText="City">
+					<h:outputText value="#{depAirport.city}" />
+				</p:column>
+
+				<p:column headerText="Name">
+					<h:outputText value="#{depAirport.name}" />
+				</p:column>
+
+				<p:column styleClass="btn-wrap" headerText="" >
+					<p:commandButton styleClass="btn" value="Choose"  actionListener="#{addflight1.chooseDeparture(depAirport.id)}" ajax="false"  />
+				</p:column>
+
+			</p:dataTable>
+
+			<p:outputLabel styleClass="table-title" value="Choose arrival airport:"  />
+			<p:dataTable styleClass="table-value" var="arrAirport" value="#{addflight1.alist}" rendered="#{addflight1.aList != null}">
+				<p:column headerText="Country">
+					<h:outputText value="#{arrAirport.country}" />
+				</p:column>
+
+				<p:column headerText="City">
+					<h:outputText value="#{arrAirport.city}" />
+				</p:column>
+
+				<p:column headerText="Name">
+					<h:outputText value="#{arrAirport.name}" />
+				</p:column>
+				<p:column styleClass="btn-wrap" headerText="" >
+					<p:commandButton styleClass="btn" value="Choose"  actionListener="#{addflight1.chooseArrival(arrAirport.id)}"  ajax="false" />
+				</p:column>
+			</p:dataTable>
+
+
+			<p:outputLabel styleClass="table-title" value="Choose airline company:"  />
+			<p:dataTable styleClass="table-value" var="company" value="#{addflight1.companyList}" rendered="#{addflight1.companyList != null}">
+				<p:column headerText="Logo" style="width: 150px; text-align : center">
+					<p:graphicImage width="120" value="#{addflight1.image}">
+						<f:param name="companyId" value="#{company.id}" />
+					</p:graphicImage>
+				</p:column>
+
+				<p:column headerText="Name">
 					<h:outputText value="#{company.name}" />
 				</p:column>
 
-				<p:column style="width: 25%" headerText="" >
-					<p:commandButton  value="Choose"  actionListener="#{addflight1.chooseCompany(company.id)}" ajax="false"  />
+				<p:column styleClass="btn-wrap" headerText="" >
+					<p:commandButton styleClass="btn" value="Choose"  actionListener="#{addflight1.chooseCompany(company.id)}" ajax="false"  />
 				</p:column>
 
 			</p:dataTable>
 
 
-			<h:panelGrid columns="2" style="margin-left: 300px;">
-					<p:outputLabel value="Departure Airport:"  />
-					<p:outputLabel id="depName" value="#{addflight1.flight.depAirport.name}"  />
-					<p:outputLabel value="Arrival Airport:"  />
-					<p:outputLabel id="arrName" value="#{addflight1.flight.destAirport.name}"  />
+			<h:panelGrid styleClass="airports_confirm" columns="2" style="margin: 0 auto">
+					<p:outputLabel styleClass="airports_values" value="Departure Airport:"  />
+					<p:outputLabel styleClass="airports_values" id="depName" value="#{addflight1.flight.depAirport.name}"  />
+					<p:outputLabel styleClass="airports_values" value="Arrival Airport:"  />
+					<p:outputLabel styleClass="airports_values" id="arrName" value="#{addflight1.flight.destAirport.name}"  />
+					<p:outputLabel styleClass="airports_values" value="Airline Company:"  />
+					<p:outputLabel styleClass="airports_values" id="airline" value="#{addflight1.flight.company.name}"  />
 
 			</h:panelGrid>
 
 
-	       </h:form> 
+	       </h:form>
 
-	        <h:form style="margin: 0 auto">
-	        <h:panelGrid columns="3" style="margin-left: 300px;">
+	        <h:form style="margin: 0 auto"  >
+	        <h:panelGrid columns="3" style="margin-left: 300px;"    rendered="#{addflight1.form2render == true}">
 				       			<p:outputLabel value="Departure Time" />
 				<p:inputText id="depDate" value="#{addflight1.depDate}" required="true" requiredMessage="#{addflight1.departureTimeRequired}" >
 					<f:convertDateTime pattern="dd.MM.yyyy HH:mm" />
@@ -166,7 +168,10 @@
 	        </h:panelGrid>
 	        	        
       	</h:form>
-	
+
+
+
+		</div>
 	</ui:define>
 	</ui:composition>
 </h:body>

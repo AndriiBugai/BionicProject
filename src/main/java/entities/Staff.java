@@ -14,7 +14,6 @@ public class Staff  {
 		private String position;
 		private String name;
 		private String surname;
-		private String passport;
 		private String email;
 		private String phone;
 		private String login;
@@ -30,7 +29,6 @@ public class Staff  {
 			txt += "; position: " + position;
 			txt += "; name: " + name;
 			txt += "; surname: " + surname;
-			txt += "; passport: " + passport;
 			txt += "; email: " + email;
 			txt += "; phone: " + phone;
 			txt += "; login: " + login;
@@ -69,14 +67,6 @@ public class Staff  {
 
 		public void setSurname(String surname) {
 			this.surname = surname;
-		}
-
-		public String getPassport() {
-			return passport;
-		}
-
-		public void setPassport(String passport) {
-			this.passport = passport;
 		}
 
 		public String getEmail() {

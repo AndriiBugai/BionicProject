@@ -64,7 +64,9 @@ public class Report1 implements Serializable {
 		HttpSession session = Util.getSession();
 		String position = (String) session.getAttribute("position");		
 		if(position == null || !position.equals("Business analyst")) {
-			ExternalContext context = FacesContext.getCurrentInstance().getExternalContext(); 
+			ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+			System.out.println("User with " + position + " tried to get reach analyst page (report1)");
+
 			context.redirect("signIn.xhtml");
 		}
 	}

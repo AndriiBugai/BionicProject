@@ -1,5 +1,6 @@
 package managedBeans;
 
+import com.sun.org.apache.xpath.internal.SourceTree;
 import iservice.ICustomerService;
 
 import java.io.IOException;
@@ -36,11 +37,12 @@ public class Accountant implements Serializable {
 	
 	private final String OrderIDRequired = "Input the name of an order";
 	
-	public void checkRole() throws IOException  {
+	public void checkRole2() throws IOException  {
 		HttpSession session = Util.getSession();
 		String position = (String) session.getAttribute("position");		
 		if(position == null || !position.equals("Booking office accountant")) {
-			ExternalContext context = FacesContext.getCurrentInstance().getExternalContext(); 
+			ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+			System.out.println("User with " + position + " tried to get reach Accountant page");
 			context.redirect("signIn.xhtml");
 		}
 	}

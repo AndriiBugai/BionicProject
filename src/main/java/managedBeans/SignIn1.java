@@ -59,7 +59,8 @@ public class SignIn1 implements Serializable {
 		String passPr = Staff.convertPassword(password);
 		
 		if(passDB.equals(passPr)) {
-			System.out.println("ok");
+			System.out.println("Auth successful");
+			System.out.println("Login: " + login + "; " + "password:" + password);
 			user = ss.getUser(login);
 			
 			HttpSession session = Util.getSession();
@@ -76,7 +77,13 @@ public class SignIn1 implements Serializable {
 			
 		}
 		else {
-			System.out.println("not ok");
+			System.out.println("Auth failed");
+			System.out.println("Login: " + login + "; " + "password:" + password);
+			System.out.println("No such login or wrong password");
+
+			FacesContext context = FacesContext.getCurrentInstance();
+			context.addMessage(null, new FacesMessage("Successful",  "Your message: ") );
+
 			return "signIn";
 		}
 	}

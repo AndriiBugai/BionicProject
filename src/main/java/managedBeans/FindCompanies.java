@@ -15,6 +15,7 @@ import javax.faces.event.PhaseId;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.Serializable;
@@ -93,6 +94,17 @@ public class FindCompanies implements Serializable {
             String studentId = context.getExternalContext().getRequestParameterMap().get("companyId");
             Company student = companyService.findById(Integer.valueOf(studentId));
             return new DefaultStreamedContent(new ByteArrayInputStream(student.getImage()));
+        }
+    }
+
+    public void checkRole() throws IOException  {
+        HttpSession session = Util.getSession();
+        String position = (String) session.getAttribute("position");
+        if(position == null || !position.equals("Booking office administrator")) {
+            ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+            System.out.println("User with " + position + " tried to get reach Admin page (find Companies)");
+
+            context.redirect("signIn.xhtml");
         }
     }
 }

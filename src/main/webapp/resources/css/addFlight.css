@@ -1,0 +1,42 @@
+.airports_values {
+    margin: 40px;
+
+    padding-bottom: 40px;
+}
+
+.table-value {
+    margin-top: 6px;
+    margin-bottom: 16px;
+}
+
+.table-title {
+    font-size: 16px;
+}
+
+.main th {
+    font-size: 15px;
+}
+
+.main td {
+    font-size: 14px;
+}
+
+
+.btn {
+    width: 90px;
+}
+
+.btn-wrap {
+    width: 110px;
+    text-align: center;
+}
+
+.main {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.airports_confirm tbody tr {
+    margin-top: 20px;
+    padding-top: 20px;
+}

@@ -20,10 +20,10 @@
 	
 	<ui:composition template="WEB-INF/templatesReport/BasicTemplateReport.xhtml">
 	<ui:define name="content">
-	
-	
+
+
 	<f:metadata>
-  <!--			<f:viewAction phase="PROCESS_VALIDATIONS" action="#{report1.checkRole}"/>   -->
+		<f:event type="preRenderView" listener="#{report1.checkRole}" />
 	</f:metadata>
 
 

@@ -14,6 +14,12 @@
 <h:body>
 	<ui:composition template="WEB-INF/templatesAdmin/BasicTemplateAdmin.xhtml">
 	<ui:define name="content">
+
+		<f:metadata>
+			<f:event type="preRenderView" listener="#{airport1.checkRole}" />
+		</f:metadata>
+
+
 		<h:outputStylesheet library="css" name="admin.css" />
 
 		<h:form styleClass="main">

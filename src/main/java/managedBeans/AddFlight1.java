@@ -5,6 +5,7 @@ import iservice.IAirportService;
 import iservice.ICompanyService;
 import iservice.IFlightService;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.Serializable;
 import java.sql.Timestamp;
@@ -16,10 +17,13 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.faces.event.PhaseId;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpSession;
 
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 import org.springframework.context.annotation.Scope;
 
 import service.AirportService;
@@ -88,11 +92,19 @@ public class AddFlight1 implements Serializable {
 	@ManagedProperty(value="#{company}")
 	private String company;
 
+	@ManagedProperty(value="#{form2render}")
+	private boolean form2render;
 
 
 
+	public boolean isForm2render() {
+		return form2render;
+	}
 
-	
+	public void setForm2render(boolean form2render) {
+		this.form2render = form2render;
+	}
+
 	private final String acityRequired = "Input the arrival city";
 	private final String dcityRequired = "Input the departure city";
 	private final String departureTimeRequired = "Input the departure time";
@@ -109,6 +121,29 @@ public class AddFlight1 implements Serializable {
 		return companyReqired;
 	}
 
+	public StreamedContent getImage() throws IOException {
+		FacesContext context = FacesContext.getCurrentInstance();
+
+		if (context.getCurrentPhaseId() == PhaseId.RENDER_RESPONSE) {
+			// So, we're rendering the HTML. Return a stub StreamedContent so that it will generate right URL.
+			return new DefaultStreamedContent();
+		}
+		else {
+			// So, browser is requesting the image. Return a real StreamedContent with the image bytes.
+			String studentId = context.getExternalContext().getRequestParameterMap().get("companyId");
+			Company student = cs.findById(Integer.valueOf(studentId));
+			return new DefaultStreamedContent(new ByteArrayInputStream(student.getImage()));
+		}
+	}
+
+	public void airportsChosen() {
+
+		boolean airport1 = (flight.getDepAirport() != null);
+		boolean airport2 = (flight.getDestAirport() != null);
+		boolean airline = (flight.getCompany() != null);
+		System.out.println((airport1 && airport2 && airline));
+		form2render = (airport1 && airport2 && airline);
+	}
 
 	
 	public String searchAirlines() {
@@ -120,7 +155,9 @@ public class AddFlight1 implements Serializable {
 		HttpSession session = Util.getSession();
 		String position = (String) session.getAttribute("position");		
 		if(position == null || !position.equals("Booking office administrator")) {
-			ExternalContext context = FacesContext.getCurrentInstance().getExternalContext(); 
+			ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+			System.out.println("User with " + position + " tried to get reach Admin page (addFlight)");
+
 			context.redirect("signIn.xhtml");
 		}
 	}
@@ -159,8 +196,10 @@ public class AddFlight1 implements Serializable {
 	}
 	
 	public String findAirports() {
+		airportsChosen();
 		dlist = as.findAirports(dCity);
 		alist = as.findAirports(aCity);
+		companyList = cs.findCompanies();
 		return "addFlight1";
 	}
 
@@ -173,6 +212,7 @@ public class AddFlight1 implements Serializable {
 		System.out.println(id);
 		Airport a = as.findById( Integer.valueOf(id));
 		flight.setDepAirport(a) ;
+		airportsChosen();
 		return "addFlight1";
 	}
 	
@@ -180,12 +220,14 @@ public class AddFlight1 implements Serializable {
 		System.out.println(id);
 		Airport a = as.findById( Integer.valueOf(id));
 		flight.setDestAirport(a);
+		airportsChosen();
 		return "addFlight1";
 	}
 
 	public String chooseCompany(String id) {
 		Company company = cs.findById( Integer.valueOf(id));
 		flight.setCompany(company);
+		airportsChosen();
 		return "addFlight1";
 	}
 	

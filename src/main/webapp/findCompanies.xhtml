@@ -22,6 +22,9 @@
         <ui:define name="content">
             <h:outputStylesheet library="css" name="admin.css" />
 
+            <f:metadata>
+                <f:event type="preRenderView" listener="#{findCompany.checkRole}" />
+            </f:metadata>
 
             <h:form styleClass="main">
                 <p:commandButton styleClass="nav-btn"  value="Add New Companiy" action="#{findCompany.addNewCompany}" ajax="false" />

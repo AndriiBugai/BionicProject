@@ -20,6 +20,10 @@
 	<ui:composition template="WEB-INF/templatesSuper/BasicTemplateSuper.xhtml">
 		<ui:define name="content">
 
+			<f:metadata>
+				<f:event type="preRenderView" listener="#{staff1.checkRole}" />
+			</f:metadata>
+
 
 <h:form id="form">
    
@@ -53,9 +57,6 @@
  
   				<p:outputLabel value="Position:" > </p:outputLabel>
  				<p:outputLabel value="#{staff.position}" > </p:outputLabel>              
-  
-  				<p:outputLabel value="Passport:" > </p:outputLabel>
- 				<p:outputLabel value="#{staff.passport}" > </p:outputLabel>
 
  				<p:outputLabel value="e-mail:" > </p:outputLabel>
  				<p:outputLabel value="#{staff.email}" > </p:outputLabel>         

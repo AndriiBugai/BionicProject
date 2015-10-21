@@ -19,6 +19,10 @@
             <h:outputStylesheet library="css" name="admin.css" />
 
 
+            <f:metadata>
+                <f:event type="preRenderView" listener="#{findAirport.checkRole}" />
+            </f:metadata>
+
             <h:form styleClass="main">
                 <p:commandButton styleClass="nav-btn"  value="Download Airports" action="#{findAirport.downloadAirports}" ajax="false" />
                 <p:commandButton styleClass="nav-btn"  value="Add a new Airport" action="#{findAirport.addNewAirport}" ajax="false" />

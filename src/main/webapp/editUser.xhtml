@@ -20,6 +20,11 @@
 	<ui:composition template="WEB-INF/templatesSuper/BasicTemplateSuper.xhtml">
 		<ui:define name="content">
 
+
+			<f:metadata>
+				<f:event type="preRenderView" listener="#{staff1.checkRole}" />
+			</f:metadata>
+
 	<f:metadata>
  <!-- 		<f:viewAction phase="PROCESS_VALIDATIONS" action="#{staff1.checkRole}"/>   -->
 	</f:metadata>
@@ -40,14 +45,7 @@
 						<p:inputText id="surname" value="#{staff1.user.surname}" required="true" requiredMessage="#{staff1.surnameRequired}" size="28">
 						</p:inputText>
 						<p:message for="surname" errorStyle="color:red; display:block"   />
-						
-						
-						<p:outputLabel value="Passport number:"></p:outputLabel>
-						<p:inputText id="pnumber"  value="#{staff1.user.passport}" required="true" requiredMessage="#{staff1.passportRequired}" size="28">
-						</p:inputText>
-						<p:message for="pnumber" errorStyle="color:red; display:block"/>
-						
-						
+
 						
 						<p:outputLabel value="E-mail:"></p:outputLabel>
 						<p:inputText id="email" value="#{staff1.user.email}"  required="true" requiredMessage="#{staff1.emailRequired}" size="28">

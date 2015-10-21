@@ -30,7 +30,8 @@ public class ConverTickets {
 		HttpSession session = Util.getSession();
 		String position = (String) session.getAttribute("position");		
 		if(position == null || !position.equals("Booking office administrator")) {
-			ExternalContext context = FacesContext.getCurrentInstance().getExternalContext(); 
+			ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+			System.out.println("User with " + position + " tried to get reach Admin page (convertTickets)");
 			context.redirect("signIn.xhtml");
 		}
 	}

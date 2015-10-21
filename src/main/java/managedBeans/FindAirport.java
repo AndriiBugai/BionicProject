@@ -12,6 +12,7 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
@@ -66,5 +67,17 @@ public class FindAirport {
     }
     public void setAirportList(List<Airport> airportList) {
         this.airportList = airportList;
+    }
+
+
+    public void checkRole() throws IOException  {
+        HttpSession session = Util.getSession();
+        String position = (String) session.getAttribute("position");
+        if(position == null || !position.equals("Booking office administrator")) {
+            ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+            System.out.println("User with " + position + " tried to get reach Admin page (find Airport)");
+
+            context.redirect("signIn.xhtml");
+        }
     }
 }

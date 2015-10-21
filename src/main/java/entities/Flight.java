@@ -33,7 +33,7 @@ public class Flight  {
 	private Airport depAirport;
 
 	@ManyToOne
-	@JoinColumn(name = "company")
+	@JoinColumn(name = "company_id")
 	private Company company;
 
 	public Company getCompany() {

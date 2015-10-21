@@ -24,9 +24,16 @@
 	</f:metadata> 
 	
 -->
+
+
+	<f:metadata>
+		<f:event type="preRenderView" listener="#{flight1.checkRole}" />
+	</f:metadata>
 	
 	<ui:composition template="WEB-INF/templatesAdmin/BasicTemplateAdmin.xhtml">
 		<ui:define name="content">
+
+
 
 			<div>
 			
